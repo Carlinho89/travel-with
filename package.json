@@ -1,0 +1,23 @@
+{
+  "name": "travel-with",
+  "version": "1.0.0",
+  "description": "TUM team18 seba2016",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Carlinho89/travel-with.git"
+  },
+  "author": "Carlo Di Domenico",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Carlinho89/travel-with/issues"
+  },
+  "homepage": "https://github.com/Carlinho89/travel-with#readme",
+  "dependencies": {
+    "express": "^4.13.4",
+    "mongoose": "^4.4.19"
+  }
+}
