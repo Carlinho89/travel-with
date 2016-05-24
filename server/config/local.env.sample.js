@@ -9,8 +9,8 @@ module.exports = {
   DOMAIN:           'http://localhost:9000',
   SESSION_SECRET:   'travelwith-secret',
 
-  FACEBOOK_ID:      'app-id',
-  FACEBOOK_SECRET:  'secret',
+  FACEBOOK_ID:      '1719798044935918',
+  FACEBOOK_SECRET:  '23fd6ff571753a795a68ff47919ec4dd',
 
   // Control debug level for modules using visionmedia/debug
   DEBUG: ''
