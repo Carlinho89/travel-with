@@ -18,6 +18,7 @@
         minDate: new Date(),
         startingDay: 1
       };
+      $scope.destination = null;
     }
     
     
