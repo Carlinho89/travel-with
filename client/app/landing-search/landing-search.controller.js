@@ -5,11 +5,12 @@
   class LandingSearchController {
 
     constructor($http, $scope) {
+      this.model = {};
       this.$http = $http;
       $scope.fromDatePickerOpen = false;
       $scope.toDatePickerOpen = false;
-      $scope.startingDate = new Date();
-      $scope.toDate = new Date();
+      this.model.startingDate = new Date();
+      this.model.toDate = new Date();
       $scope.openFromDatePicker = () => $scope.fromDatePickerOpen = true;
       $scope.openToDatePicker = () => $scope.toDatePickerOpen = true;
       $scope.dateOptions = {
@@ -18,22 +19,35 @@
         minDate: new Date(),
         startingDay: 1
       };
-      $scope.destination = null;
+      this.model.destination = null;
+      
+      this.model.GetDTO = function(){
+        return {
+        startingDate: this.startingDate,
+        toDate: this.toDate,
+        location: {
+          lat: this.destination.geometry.location.lat(),
+          lon: this.destination.geometry.location.lon(),
+          name: this.destination.name
+        }
+      };
+      };
     }
     
-    
-    // $onInit() {
-    //   this.$http.get('/api/things')
+    search(){
+      this.$http.post('/api/travelroutes/search', this.model.GetDTO());
     //     .then(response => {
-    //       this.awesomeThings = response.data;
+    //       ... = response.data;
     //     });
     // }
+    }
 
   }
 
   angular.module('travelWithApp')
     .component('landingSearch', {
       templateUrl: 'app/landing-search/landing-search.html',
-      controller: LandingSearchController
+      controller: LandingSearchController,
+      controllerAs: 'vm'
     });
 })();
