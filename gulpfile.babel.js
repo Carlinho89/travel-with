@@ -676,3 +676,5 @@ gulp.task('buildcontrol:openshift', function(done) {
         function() {done();}
     );
 });
+
+gulp.task('default', ['serve']);

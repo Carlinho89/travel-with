@@ -2,8 +2,8 @@
 
 angular.module('travelWithApp')
   .config(function($stateProvider) {
-    $stateProvider.state('main', {
+    $stateProvider.state('landingPage', {
       url: '/',
-      template: '<main></main>'
+      template: '<landing-search></landing-search>'
     });
   });
