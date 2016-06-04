@@ -5,15 +5,19 @@
   </div>
 </header>
 
+
+
 <div class="container">
     <form class="t" ng-submit="vm.search()">
+
     <label>Syncs in realtime across clients</label>
   <div class="row">
-    <div class="col-lg-12">
-      <div class="input-group">
-      <input type="text" class="form-control" ng-model="vm.model.destination" placeholder="Enter place or city..."  g-places-autocomplete ng-required="true">
+    <div>
+      <div class="form-group">
+        <input type="text" class="form-control" ng-model="vm.model.destination" placeholder="Enter place or city..."  g-places-autocomplete ng-required="true">
+      </div>
     </div>
-    
+
     <div class="row">
       <div class="col-md-6">
         <p class="input-group">
@@ -23,7 +27,7 @@
           </span>
         </p>
       </div>
-      
+
       <div class="col-md-6">
         <p class="input-group">
           <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-required="true" is-open="toDatePickerOpen" ng-model="vm.model.toDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" />

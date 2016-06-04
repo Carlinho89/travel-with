@@ -5,6 +5,7 @@
   class LandingSearchController {
 
     constructor($http, $scope) {
+      
       this.model = {};
       this.$http = $http;
       $scope.fromDatePickerOpen = false;
@@ -20,7 +21,7 @@
         startingDay: 1
       };
       this.model.destination = null;
-      
+
       this.model.GetDTO = function(){
         return {
         startingDate: this.startingDate,
@@ -33,7 +34,7 @@
       };
       };
     }
-    
+
     search(){
       this.$http.post('/api/travelroutes/search', this.model.GetDTO());
     //     .then(response => {
