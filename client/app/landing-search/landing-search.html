@@ -44,15 +44,17 @@
   </form>
 
   <div class="row" ng-show="vm.hasSearched">
-    <div class="col-md-3">
-      <div id="container-div">
-        <p>
+      <div class="col-md-4" id="left-container-div" >
+        <h2 class="row" >
           {{vm.model.destination.name}}
+        </h2>
+        <p class="row">
+          {{vm.model.startingDate | date:'yyyy-MM-dd' }} to {{vm.model.toDate | date:'yyyy-MM-dd'}}
         </p>
       </div>
-    </div>
-    <div class="col-md-9">
-      <table class="table" id="travel-result-table">
+
+    <div class="col-md-8" id="right-container-div">
+      <table class="table">
         <thead>
         <tr>
           <th>Orgnizer</th>
@@ -63,7 +65,14 @@
         <tbody>
 
         <tr ng-repeat="mockD in vm.mockData">
-          <td>{{mockD.organizer}}</td>
+          <td>
+            <div class="row" id="organizer">
+              {{mockD.organizer}}
+            </div>
+            <div class="row">
+              <img class="img-rounded" src="http://pickaface.net/includes/themes/clean/img/slide2.png" alt="Avatar" id="profile-picture">
+            </div>
+          </td>
           <td>{{mockD.dates[0] | date:'yyyy-MM-dd'}} - {{mockD.dates[1] | date:'yyyy-MM-dd'}}</td>
           <td>
             <p ng-repeat="traveler in mockD.travelers">

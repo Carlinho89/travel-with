@@ -50,8 +50,18 @@
   margin-top:20px;
 }
 
-#container-div {
+#left-container-div, #right-container-div {
+  padding-left: 20px;
   background-color: black;
   opacity: 0.4;
   margin-top:20px;
+}
+
+#profile-picture{
+  width: 100px;
+  height: 100px;
+}
+
+#organizer{
+  padding-left: 20px;
 }
