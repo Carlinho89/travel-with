@@ -1,89 +1,107 @@
 <header class="hero-unit" id="banner">
-  <div class="container">
-    <img border="0" src="/assets/images/logo.png" height="200px">
-    <p class="lead" style="font-size: 30px;">Join people travelling to your destination.</p>
-  </div>
-</header>
+    <div class="container">
+        <img border="0" src="/assets/images/logo.png" height="200px">
 
+        <p class="lead" style="font-size: 30px;">Join people travelling to your destination.</p>
+    </div>
+</header>
 
 
 <div class="container">
     <form class="t" ng-submit="vm.search()">
 
-    <label>Where would you like to Travel?</label>
-  <div class="row">
-    <div>
-      <div class="form-group">
-        <input type="text" class="form-control" ng-model="vm.model.destination" placeholder="Enter place or city..."  g-places-autocomplete ng-required="true">
-      </div>
-    </div>
+        <label>Where would you like to Travel?</label>
 
-    <div class="row">
-      <div class="col-md-6">
-        <p class="input-group">
-          <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-required="true" is-open="fromDatePickerOpen" ng-model="vm.model.startingDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+        <div class="row">
+            <div>
+                <div class="form-group">
+                    <input type="text" class="form-control" ng-model="vm.model.destination"
+                           placeholder="Enter place or city..." g-places-autocomplete ng-required="true">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-required="true"
+                               is-open="fromDatePickerOpen" ng-model="vm.model.startingDate"
+                               datepicker-options="dateOptions" ng-required="true" close-text="Close"/>
           <span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="openFromDatePicker()"><i class="glyphicon glyphicon-calendar"></i></button>
+            <button type="button" class="btn btn-default" ng-click="openFromDatePicker()"><i
+                    class="glyphicon glyphicon-calendar"></i></button>
           </span>
-        </p>
-      </div>
+                    </p>
+                </div>
 
-      <div class="col-md-6">
-        <p class="input-group">
-          <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-required="true" is-open="toDatePickerOpen" ng-model="vm.model.toDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                <div class="col-md-6">
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-required="true"
+                               is-open="toDatePickerOpen" ng-model="vm.model.toDate" datepicker-options="dateOptions"
+                               ng-required="true" close-text="Close"/>
           <span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="openToDatePicker()"><i class="glyphicon glyphicon-calendar"></i></button>
+            <button type="button" class="btn btn-default" ng-click="openToDatePicker()"><i
+                    class="glyphicon glyphicon-calendar"></i></button>
           </span>
-        </p>
-      </div>
-    </div>
-  </div>
+                    </p>
+                </div>
+            </div>
+        </div>
 
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary">Go</button>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
 
-    <button type="submit" class="btn btn-primary">Go</button>
-  </form>
+</div>
 
-  <div class="row" ng-show="vm.hasSearched">
-      <div class="col-md-4" id="left-container-div" >
-        <h2 class="row" >
-          {{vm.model.destination.name}}
+</form>
+
+<div class="row" ng-show="vm.hasSearched">
+    <div class="col-md-4" id="left-container-div">
+        <h2 class="row">
+            {{vm.model.destination.name}}
         </h2>
+
         <p class="row">
-          {{vm.model.startingDate | date:'yyyy-MM-dd' }} to {{vm.model.toDate | date:'yyyy-MM-dd'}}
+            {{vm.model.startingDate | date:'yyyy-MM-dd' }} to {{vm.model.toDate | date:'yyyy-MM-dd'}}
         </p>
-      </div>
+    </div>
 
     <div class="col-md-8" id="right-container-div">
-      <table class="table">
-        <thead>
-        <tr>
-          <th>Orgnizer</th>
-          <th>Date</th>
-          <th>Travelers</th>
-        </tr>
-        </thead>
-        <tbody>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Orgnizer</th>
+                <th>Date</th>
+                <th>Travelers</th>
+            </tr>
+            </thead>
+            <tbody>
 
-        <tr ng-repeat="mockD in vm.mockData">
-          <td>
-            <div class="row" id="organizer">
-              {{mockD.organizer}}
-            </div>
-            <div class="row">
-              <img class="img-rounded" src="http://pickaface.net/includes/themes/clean/img/slide2.png" alt="Avatar" id="profile-picture">
-            </div>
-          </td>
-          <td>{{mockD.dates[0] | date:'yyyy-MM-dd'}} - {{mockD.dates[1] | date:'yyyy-MM-dd'}}</td>
-          <td>
-            <p ng-repeat="traveler in mockD.travelers">
-              {{traveler}}
-            </p>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+            <tr ng-repeat="mockD in vm.mockData">
+                <td>
+                    <div class="row" id="organizer">
+                        {{mockD.organizer}}
+                    </div>
+                    <div class="row">
+                        <img class="img-rounded" src="http://pickaface.net/includes/themes/clean/img/slide2.png"
+                             alt="Avatar" id="profile-picture">
+                    </div>
+                </td>
+                <td>{{mockD.dates[0] | date:'yyyy-MM-dd'}} - {{mockD.dates[1] | date:'yyyy-MM-dd'}}</td>
+                <td>
+                    <p ng-repeat="traveler in mockD.travelers">
+                        {{traveler}}
+                    </p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-  </div>
+</div>
 
 
 </div>
