@@ -47,21 +47,29 @@
 #travel-result-table {
   background-color: black;
   opacity: 0.4;
-  margin-top:20px;
+  margin-top: 20px;
 }
 
 #left-container-div, #right-container-div {
   padding-left: 20px;
   background-color: black;
   opacity: 0.4;
-  margin-top:20px;
+  margin-top: 20px;
 }
 
-#profile-picture{
+#profile-picture {
   width: 100px;
   height: 100px;
 }
 
-#organizer{
+#organizer {
   padding-left: 20px;
+}
+
+.btn.btn-primary {
+  background-color: #428bca;
+  border-color: #357ebd;
+  color: #fff;
+  width: 100px;
+  font-size: 20px;
 }
