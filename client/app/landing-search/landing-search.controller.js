@@ -59,10 +59,19 @@
 
 
     search(){
-      console.log('Search');
+      console.log('Search Made');
       this.hasSearched = true;
-      console.log(this.mockData);
 
+      console.log(this.model.destination);
+
+      if (this.model.destination.address_components.length >=5){ //city
+        this.resultQuery.cityName = this.model.destination.address_components[0].name;
+        this.resultQuery.country = this.model.destination.address_components[4].name;
+      }
+      else {
+        this.resultQuery.cityName = this.model.destination.address_components[0].name;;
+        this.resultQuery.country = "";
+      }
 
       //  this.$http.post('/api/travelroutes/search', this.model.GetDTO());
     //     .then(response => {

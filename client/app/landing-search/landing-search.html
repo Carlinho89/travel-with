@@ -43,24 +43,38 @@
     <button type="submit" class="btn btn-primary">Go</button>
   </form>
 
-  <table class="table" ng-show="vm.hasSearched">
-    <thead>
-    <tr>
-      <th>Orgnizer</th>
-      <th>Date</th>
-      <th>Travelers</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="mockD in vm.mockData">
-      <td>{{mockD.organizer}}</td>
-      <td>{{mockD.dates[0] | date:'yyyy-MM-dd'}} - {{mockD.dates[1] | date:'yyyy-MM-dd'}}</td>
-      <td>
-        <p ng-repeat="traveler in mockD.travelers">
-          {{traveler}}
+  <div class="row" ng-show="vm.hasSearched">
+    <div class="col-md-3">
+      <div id="container-div">
+        <p>
+          {{vm.model.destination.name}}
         </p>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <table class="table" id="travel-result-table">
+        <thead>
+        <tr>
+          <th>Orgnizer</th>
+          <th>Date</th>
+          <th>Travelers</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr ng-repeat="mockD in vm.mockData">
+          <td>{{mockD.organizer}}</td>
+          <td>{{mockD.dates[0] | date:'yyyy-MM-dd'}} - {{mockD.dates[1] | date:'yyyy-MM-dd'}}</td>
+          <td>
+            <p ng-repeat="traveler in mockD.travelers">
+              {{traveler}}
+            </p>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
 </div>
