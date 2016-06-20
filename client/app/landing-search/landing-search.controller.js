@@ -48,7 +48,7 @@
         toDate: this.toDate,
         location: {
           lat: this.destination.geometry.location.lat(),
-          lon: this.destination.geometry.location.lon(),
+          lon: this.destination.geometry.location.lng(),
           name: this.destination.name
         }
       };
@@ -61,12 +61,20 @@
     search(){
       console.log('Search Made');
       this.hasSearched = true;
-      
-      //  this.$http.post('/api/travelroutes/search', this.model.GetDTO());
-    //     .then(response => {
-    //       ... = response.data;
-    //     });
-    // }
+
+      this.$http.post('/api/travelroutes/search', this.model.GetDTO())
+    .then(
+        function(response){
+          // success callback
+          console.log('successful search')
+          return response.data
+        },
+        function(response){
+          console.log('error')
+          return response.data;
+          // failure callback
+        }
+      );
     }
 
   }

@@ -56,7 +56,11 @@ export function index(req, res) {
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
-
+export function search(req, res) {
+  return TravelRoute.find({itinerary: {$elemMatch : { startDate : {$gte: req.body.startingDate}}}}).exec()
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
 // Gets a single Thing from the DB
 export function show(req, res) {
   return TravelRoute.findById(req.params.id).exec()

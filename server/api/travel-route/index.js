@@ -5,6 +5,7 @@ var controller = require('./travel-route.controller');
 
 var router = express.Router();
 
+router.post('/search', controller.search);
 router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
