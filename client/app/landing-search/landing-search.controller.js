@@ -6,26 +6,26 @@
 
     constructor($http, $scope) {
 
-      this.mockData = [
+    /*  this.mockData = [
         { organizer: 'Pavel S.',
           travelers:['Filip Toll', 'Bob Smith', 'Andrea Agnelli'],
-          dates : [new Date("10-6-16"), new Date("10-16-16")]
+          dates : [new Date('10-6-16'), new Date('10-16-16')]
         },
         { organizer: 'Carlo Di Domenico',
           travelers:['John Doe', 'Max Powers', 'Enricos De Rios'],
-          dates : [new Date("10-7-16"), new Date("10-14-16")]
+          dates : [new Date('10-7-16'), new Date('10-14-16')]
         },
         { organizer: 'Maja May',
           travelers:['Marius Deam', 'Francis La Porta'],
-          dates : [new Date("10-7-16"), new Date("10-12-16")]
+          dates : [new Date('10-7-16'), new Date('10-12-16')]
         },
         {
           organizer: 'Dann Oliver',
           travelers: ['John Doe', 'Max Powers', 'Andrea Agnelli'],
-          dates: [new Date("10-8-16"), new Date("10-18-16")]
+          dates: [new Date('10-8-16'), new Date('10-18-16')]
         }
       ];
-
+    */
       this.model = {};
       this.$http = $http;
       $scope.fromDatePickerOpen = false;
@@ -60,17 +60,19 @@
 
     search(){
       console.log('Search Made');
-      this.hasSearched = true;
 
       this.$http.post('/api/travelroutes/search', this.model.GetDTO())
-    .then(
+      .then(
         function(response){
           // success callback
-          console.log('successful search')
-          return response.data
+          this.hasSearched = true;
+          console.log('successful search pongo');
+          console.log(response);
+          return response.data;
         },
         function(response){
-          console.log('error')
+          console.log('error');
+          console.log('nope: ' + response);
           return response.data;
           // failure callback
         }
