@@ -11,7 +11,8 @@ var TravelRouteSchema = new mongoose.Schema({
     },
     requestor: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
     }
 });
 /*
