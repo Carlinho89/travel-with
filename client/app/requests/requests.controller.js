@@ -2,13 +2,10 @@
 (function () {
 
     class RequestsComponent {
-        constructor($http, $scope) {
-            this.travelRequest = {};
+        constructor($http, $scope, Auth) {
             this.$http = $http;
             $scope.fromDatePickerOpen = false;
             $scope.toDatePickerOpen = false;
-            this.travelRequest.startingDate = new Date;
-            this.travelRequest.toDate = new Date;
             $scope.openFromDatePicker = () => $scope.fromDatePickerOpen = true;
             $scope.openToDatePicker = () => $scope.toDatePickerOpen = true;
             $scope.dateOptions = {
@@ -17,18 +14,45 @@
                 minDate: new Date,
                 startingDay: 1
             };
-            this.travelRequest.destination = null;
+            // model for travel route
+            this.travelRequest = {};
+            this.travelRequest.title = "";
+            this.travelRequest.description = "";
+            this.travelRequest.requestor = Auth.getCurrentUser;
+            this.travelRequest.itineraryItems = [];
+            // model for itinerary item
+            $scope.itineraryItem = {};
+            $scope.itineraryItem.name = "";
+            $scope.itineraryItem.startDate = new Date;
+            $scope.itineraryItem.endDate = new Date;
             this.travelRequest.GetDTO = function () {
                 return {
-                    startingDate: this.startingDate,
-                    toDate: this.toDate,
-                    location: {
-                        lat: this.destination.geometry.location.lat(),
-                        lon: this.destination.geometry.location.lng(),
-                        name: this.destination.name
-                    }
-                };
+                    startDate: this.startDate,
+                    endDate: this.endDate,
+                    itineraryItems: [
+                        {
+                            name: $scope.itineraryItem.name,
+                            startDate: $scope.itineraryItem.startDate,
+                            endDate: $scope.itineraryItem.endDate,
+                            location: {
+                                type: "Point",
+                                coordinates: [12.123456, 13.134578]
+                            },
+                            likelihood: 'CAN'
+                        }
+                    ]
+
+                }
+                    ;
             };
+        }
+
+        createRequest() {
+            console.log(this.travelRequest.title);
+            console.log(this.travelRequest.description);
+            console.log(this.travelRequest.requestor.name);
+            console.log($scope.itineraryItem.startDate);
+            console.log($scope.itineraryItem.endDate);
         }
     }
 
