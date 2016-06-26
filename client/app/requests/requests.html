@@ -67,22 +67,11 @@
 
         <!-- Search input-->
         <div class="form-group">
-            <label class="col-md-4 control-label" for="searchinput">Location: </label>
+            <label class="col-md-4 control-label" for="locationinput">Location: </label>
 
             <div class="col-md-4">
-                <input type="text" class="form-control" ng-model="rc.travelRequest.destination"
+                <input id="locationinput" type="text" class="form-control" ng-model="rc.travelRequest.destination"
                        placeholder="Enter place or city..." g-places-autocomplete >
-                <!-- <span class="help-block">validation message placeholder?</span> !-->
-            </div>
-        </div>
-
-        <!-- Search input-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="searchinput">Search Input</label>
-
-            <div class="col-md-4">
-                <input id="searchinput" name="searchinput" type="search" placeholder="placeholder"
-                       class="form-control input-md">
                 <!-- <span class="help-block">validation message placeholder?</span> !-->
             </div>
         </div>

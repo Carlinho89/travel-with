@@ -27,8 +27,8 @@
             $scope.itineraryItem.endDate = new Date;
             this.travelRequest.GetDTO = function () {
                 return {
-                    startDate: this.startDate,
-                    endDate: this.endDate,
+                    title: this.title,
+                    description: this.description,
                     itineraryItems: [
                         {
                             name: $scope.itineraryItem.name,
@@ -40,7 +40,8 @@
                             },
                             likelihood: 'CAN'
                         }
-                    ]
+                    ],
+                    requestor: this.requestor
 
                 }
                     ;
@@ -48,11 +49,25 @@
         }
 
         createRequest() {
-            console.log(this.travelRequest.title);
-            console.log(this.travelRequest.description);
-            console.log(this.travelRequest.requestor.name);
-            console.log($scope.itineraryItem.startDate);
-            console.log($scope.itineraryItem.endDate);
+            console.log('posted title: ' + this.travelRequest.title);
+            console.log('posted description: ' + this.travelRequest.description);
+            console.log('posted User: ' + this.travelRequest.requestor);
+
+            this.$http.post('/api/travelroutes', this.travelRequest.getDTO).then(
+                function (response) {
+                    $scope.games.push($scope.newGame);
+                    $scope.newGame = {};
+                    console.log('successful search pongo');
+                    console.log(response);
+                    return response.data;
+                },
+                function (response) {
+                    console.log('error');
+                    console.log('nope: ' + response);
+                    return response.data;
+                    // failure callback
+                }
+            );
         }
     }
 
