@@ -5,62 +5,62 @@
 <form class="form-horizontal">
     <fieldset>
 
-        <!-- Form Name -->
-        <legend>Form Name</legend>
-
-        <!-- Text input-->
+        <!-- Title input-->
         <div class="form-group">
-            <label class="col-md-4 control-label" for="textinput">Text Input</label>
+            <label class="col-md-4 control-label" for="textinput">Title</label>
 
             <div class="col-md-4">
                 <input id="textinput" name="textinput" type="text" placeholder="placeholder"
                        class="form-control input-md">
-                <span class="help-block">help</span>
+                <span class="help-block">validation message placeholder?</span>
             </div>
         </div>
 
-        <!-- Search input-->
+        <!-- Description input-->
         <div class="form-group">
-            <label class="col-md-4 control-label" for="searchinput">Search Input</label>
+            <label class="col-md-4 control-label" for="textinput">Description</label>
 
             <div class="col-md-4">
-                <input id="searchinput" name="searchinput" type="search" placeholder="placeholder"
+                <input id="textinput" name="textinput" type="text" placeholder="placeholder"
                        class="form-control input-md">
-
-                <p class="help-block">help</p>
+                <span class="help-block">validation message placeholder?</span>
             </div>
         </div>
 
-        <!-- Search input-->
+        <!-- Itinerary input-->
+
+
+        <!-- Stop Name-->
         <div class="form-group">
-            <label class="col-md-4 control-label" for="searchinput">Search Input</label>
+            <label class="col-md-4 control-label" for="textinput">Stop Name</label>
 
             <div class="col-md-4">
-                <input id="searchinput" name="searchinput" type="search" placeholder="placeholder"
+                <input id="textinput" name="textinput" type="text" placeholder="placeholder"
                        class="form-control input-md">
-
-                <p class="help-block">help</p>
+                <span class="help-block">validation message placeholder?</span>
             </div>
         </div>
 
+        <!-- Travel Dates input-->
         <div class="row">
             <div class="row">
                 <div class="col-md-6">
                     <p class="input-group">
                         <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-required="true"
-                               is-open="fromDatePickerOpen" ng-model="vm.model.startingDate"
+                               is-open="fromDatePickerOpen" ng-model="rc.travelRequest.startingDate"
                                datepicker-options="dateOptions" ng-required="true" close-text="Close"/>
-          <span class="input-group-btn">
+                <span class="input-group-btn">
             <button type="button" class="btn btn-default" ng-click="openFromDatePicker()"><i
                     class="glyphicon glyphicon-calendar"></i></button>
-          </span>
+                </span>
                     </p>
                 </div>
 
                 <div class="col-md-6">
                     <p class="input-group">
                         <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-required="true"
-                               is-open="toDatePickerOpen" ng-model="vm.model.toDate" datepicker-options="dateOptions"
+                               is-open="toDatePickerOpen" ng-model="rc.travelRequest.toDate"
+                               datepicker-options="dateOptions"
                                ng-required="true" close-text="Close"/>
           <span class="input-group-btn">
             <button type="button" class="btn btn-default" ng-click="openToDatePicker()"><i
@@ -70,6 +70,31 @@
                 </div>
             </div>
         </div>
+
+        <!-- Search input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="searchinput">Location: </label>
+
+            <div class="col-md-4">
+                <input type="text" class="form-control" ng-model="rc.travelRequest.destination"
+                       placeholder="Enter place or city..." g-places-autocomplete ng-required="true">
+
+                <p class="help-block">help</p>
+            </div>
+        </div>
+
+        <!-- Search input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="searchinput">Search Input</label>
+
+            <div class="col-md-4">
+                <input id="searchinput" name="searchinput" type="search" placeholder="placeholder"
+                       class="form-control input-md">
+
+                <p class="help-block">help</p>
+            </div>
+        </div>
+
 
     </fieldset>
 </form>
