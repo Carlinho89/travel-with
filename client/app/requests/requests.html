@@ -43,5 +43,33 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-required="true"
+                               is-open="fromDatePickerOpen" ng-model="vm.model.startingDate"
+                               datepicker-options="dateOptions" ng-required="true" close-text="Close"/>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="openFromDatePicker()"><i
+                    class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+                    </p>
+                </div>
+
+                <div class="col-md-6">
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-required="true"
+                               is-open="toDatePickerOpen" ng-model="vm.model.toDate" datepicker-options="dateOptions"
+                               ng-required="true" close-text="Close"/>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="openToDatePicker()"><i
+                    class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
     </fieldset>
 </form>
