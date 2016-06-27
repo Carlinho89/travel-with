@@ -18,7 +18,7 @@
             this.travelRequest = {};
             this.travelRequest.title = "";
             this.travelRequest.description = "";
-            this.travelRequest.requestor = Auth.getCurrentUser;
+            this.travelRequest.requestor = Auth.getCurrentUser();
             this.travelRequest.itineraryItems = [];
             // model for itinerary item
             $scope.itineraryItem = {};
@@ -67,6 +67,7 @@
                     // failure callback
                 }
             );
+
         }
     }
 
