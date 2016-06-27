@@ -18,14 +18,14 @@
             this.travelRequest = {};
             this.travelRequest.title = "";
             this.travelRequest.description = "";
-            this.travelRequest.requestor = Auth.getCurrentUser;
+            this.travelRequest.requestor = Auth.getCurrentUser();
             this.travelRequest.itineraryItems = [];
             // model for itinerary item
             $scope.itineraryItem = {};
             $scope.itineraryItem.name = "";
             $scope.itineraryItem.startDate = new Date;
             $scope.itineraryItem.endDate = new Date;
-            this.travelRequest.GetDTO = function () {
+            this.travelRequest.getDTO = function () {
                 return {
                     title: this.title,
                     description: this.description,
@@ -43,31 +43,13 @@
                     ],
                     requestor: this.requestor
 
-                }
-                    ;
+                };
             };
         }
 
         createRequest() {
-            console.log('posted title: ' + this.travelRequest.title);
-            console.log('posted description: ' + this.travelRequest.description);
-            console.log('posted User: ' + this.travelRequest.requestor);
 
-            this.$http.post('/api/travelroutes', this.travelRequest.getDTO).then(
-                function (response) {
-                    $scope.games.push($scope.newGame);
-                    $scope.newGame = {};
-                    console.log('successful search pongo');
-                    console.log(response);
-                    return response.data;
-                },
-                function (response) {
-                    console.log('error');
-                    console.log('nope: ' + response);
-                    return response.data;
-                    // failure callback
-                }
-            );
+
         }
     }
 
