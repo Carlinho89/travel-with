@@ -29,8 +29,8 @@
           lat: this.destination.geometry.location.lat(),
           lon: this.destination.geometry.location.lng(),
           name: this.destination.name
-        }
-      };
+          }
+        };
       };
       this.hasSearched = false;
 

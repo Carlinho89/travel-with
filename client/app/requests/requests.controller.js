@@ -25,35 +25,34 @@
             $scope.itineraryItem.name = "";
             $scope.itineraryItem.startDate = new Date;
             $scope.itineraryItem.endDate = new Date;
-            this.travelRequest.GetDTO = function () {
-                return {
-                    title: this.title,
-                    description: this.description,
-                    itineraryItems: [
-                        {
-                            name: $scope.itineraryItem.name,
-                            startDate: $scope.itineraryItem.startDate,
-                            endDate: $scope.itineraryItem.endDate,
-                            location: {
-                                type: "Point",
-                                coordinates: [12.123456, 13.134578]
-                            },
-                            likelihood: 'CAN'
-                        }
-                    ],
-                    requestor: this.requestor
 
+          this.travelRequest.getDTO = function(){
+            return {
+              title: this.title,
+              description: this.description,
+              itineraryItems: [
+                {
+                  name: $scope.itineraryItem.name,
+                  startDate: $scope.itineraryItem.startDate,
+                  endDate: $scope.itineraryItem.endDate,
+                  location: {
+                    type: "Point",
+                    coordinates: [12.123456, 13.134578]
+                  },
+                  likelihood: 'CAN'
                 }
-                    ;
+              ],
+              requestor: this.requestor
             };
+          };
         }
 
         createRequest() {
-            console.log('posted title: ' + this.travelRequest.title);
-            console.log('posted description: ' + this.travelRequest.description);
-            console.log('posted User: ' + this.travelRequest.requestor);
 
-            this.$http.post('/api/travelroutes', this.travelRequest.getDTO).then(
+            var request = this.travelRequest.getDTO();
+            console.log(request);
+
+            this.$http.post('/api/travelroutes',request).then(
                 function (response) {
                     $scope.games.push($scope.newGame);
                     $scope.newGame = {};
@@ -63,7 +62,7 @@
                 },
                 function (response) {
                     console.log('error');
-                    console.log('nope: ' + response);
+                    console.log(response);
                     return response.data;
                     // failure callback
                 }
