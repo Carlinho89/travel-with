@@ -6,12 +6,8 @@
       this.$http = $http;
       $scope.fromDatePickerOpen = false;
       $scope.toDatePickerOpen = false;
-      $scope.openFromDatePicker = () =
-    >
-      $scope.fromDatePickerOpen = true;
-      $scope.openToDatePicker = () =
-    >
-      $scope.toDatePickerOpen = true;
+      $scope.openFromDatePicker = () => $scope.fromDatePickerOpen = true;
+      $scope.openToDatePicker = () => $scope.toDatePickerOpen = true ;
       $scope.dateOptions = {
         formatYear: 'yy',
         maxDate: new Date(2020, 5, 22),

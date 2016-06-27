@@ -45,8 +45,6 @@
     "chai-things": "^0.2.0",
     "connect-livereload": "^0.5.3",
     "del": "^2.0.2",
-    "grunt": "^1.0.1",
-    "grunt-build-control": "^0.7.0",
     "gulp": "^3.9.1",
     "gulp-add-src": "^0.2.0",
     "gulp-angular-templatecache": "^1.7.0",
