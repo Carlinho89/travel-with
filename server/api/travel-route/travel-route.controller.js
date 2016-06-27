@@ -99,3 +99,10 @@ export function destroy(req, res) {
     .then(removeEntity(res))
     .catch(handleError(res));
 }
+
+// Get all TravelRouths of the current user
+
+export  function getUserTravellRouths(req, res) {
+  return null;//TravelRoute.find
+
+}
