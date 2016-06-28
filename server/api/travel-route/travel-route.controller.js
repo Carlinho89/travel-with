@@ -3,6 +3,8 @@
 import _ from 'lodash';
 import TravelRoute from './travel-route.model';
 
+var ObjectId = require('mongodb').ObjectID;
+
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
   return function(entity) {
@@ -102,7 +104,13 @@ export function destroy(req, res) {
 
 // Get all TravelRouths of the current user
 
-export  function getUserTravellRouths(req, res) {
-  return null;//TravelRoute.find
+export  function getUserTravelRoutes(req, res) {
 
+  var userID = ObjectId(req.params.us_id);
+
+  return TravelRoute.find({
+    'requestor': userID
+  }).exec()
+    .then(respondWithResult(res))
+    .catch(handleError(res));
 }
