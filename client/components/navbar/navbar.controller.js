@@ -10,9 +10,18 @@ class NavbarController {
         this.getCurrentUser = Auth.getCurrentUser;
         this.menu = [
             {
-                title: 'Requests',
-                state: 'requests'
-            },
+                tabText: 'Travel Routes',
+                menuItems: [
+                    {
+                        itemText: 'My Travel Routes',
+                        state: 'list-travel-routes',
+                    },
+                    {
+                        itemText: 'Create New Route',
+                        state: 'add-travel-routes',
+                    }
+                ]
+            }
         ];
     }
 
