@@ -19,7 +19,7 @@ TravelRoute.find({}).remove()
           endDate: new Date(2016, 7, 11),
           location: {
             type: "Point",
-            coordinates: [12.123456, 13.134578]
+            coordinates: [11.0, 12.0]
           }
         },
         {
@@ -28,7 +28,7 @@ TravelRoute.find({}).remove()
           endDate: new Date(2016, 7, 14),
           location: {
             type: "Point",
-            coordinates: [10.123456, 13.134578]
+            coordinates: [10.0, 13.0]
           }
         }
       ]

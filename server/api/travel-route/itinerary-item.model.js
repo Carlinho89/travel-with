@@ -18,7 +18,7 @@ export var ItineraryItemSchema = new mongoose.Schema({
     required: true
   },
   location: {
-    type: mongoose.Schema.Types.Point,
+    type:mongoose.Schema.Types.Point,
     required: true
   },
   likelihood: {

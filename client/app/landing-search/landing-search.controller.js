@@ -4,10 +4,12 @@
 
   class LandingSearchController {
 
+
     constructor($http, $scope) {
 
       this.mockData = [
-        { organizer: 'Pavel S.',
+        {
+          organizer: 'Pavel S.',
           travelers:['Filip Toll', 'Bob Smith', 'Andrea Agnelli'],
           dates : [new Date("10-6-16"), new Date("10-16-16")]
         },
@@ -25,6 +27,7 @@
           dates: [new Date("10-8-16"), new Date("10-18-16")]
         }
       ];
+      this.mockData2 = [];
 
       this.model = {};
       this.$http = $http;
@@ -53,6 +56,7 @@
         }
       };
       };
+
       this.hasSearched = false;
 
     }
@@ -61,13 +65,27 @@
     search(){
       console.log('Search Made');
       this.hasSearched = true;
+      console.log(this.hasSearched);
+var b=this;
 
       this.$http.post('/api/travelroutes/search', this.model.GetDTO())
     .then(
         function(response){
+
+          angular.forEach(response.data, function(item) {
+            angular.forEach(item.itinerary, function(item2) {
+              b.mockData2.push(item2);
+
+            });
+
+          });
+
           // success callback
-          console.log('successful search')
-          return response.data
+
+
+
+
+          return response.data;
         },
         function(response){
           console.log('error')

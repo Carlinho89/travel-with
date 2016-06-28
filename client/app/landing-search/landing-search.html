@@ -58,28 +58,24 @@
       <table class="table">
         <thead>
         <tr>
-          <th>Orgnizer</th>
+          <th>Name</th>
           <th>Date</th>
-          <th>Travelers</th>
+          <th>Likelihood</th>
         </tr>
         </thead>
         <tbody>
 
-        <tr ng-repeat="mockD in vm.mockData">
+        <tr ng-repeat="mockD in vm.mockData2">
           <td>
             <div class="row" id="organizer">
-              {{mockD.organizer}}
+              {{mockD.name}}
             </div>
             <div class="row">
               <img class="img-rounded" src="http://pickaface.net/includes/themes/clean/img/slide2.png" alt="Avatar" id="profile-picture">
             </div>
           </td>
-          <td>{{mockD.dates[0] | date:'yyyy-MM-dd'}} - {{mockD.dates[1] | date:'yyyy-MM-dd'}}</td>
-          <td>
-            <p ng-repeat="traveler in mockD.travelers">
-              {{traveler}}
-            </p>
-          </td>
+          <td>{{mockD.startDate | date:'yyyy-MM-dd'}} - {{mockD.endDate | date:'yyyy-MM-dd'}}</td>
+          <td>{{mockD.likelihood}}</td>
         </tr>
         </tbody>
       </table>
