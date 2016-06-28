@@ -13,10 +13,15 @@
         </div>
         <div uib-collapse="nav.isCollapsed" class="navbar-collapse collapse" id="navbar-main">
             <ul class="nav navbar-nav">
-                <li ng-show="nav.isLoggedIn()" ng-repeat="item in nav.menu" ui-sref-active="active">
-
-                    <a ui-sref="{{item.state}}">{{item.title}}</a>
+                <!-- <li class="dropdown" ng-show="nav.isLoggedIn()" ng-repeat="item in nav.menu" ui-sref-active="active"> !-->
+                    <!-- ui-sref="{{item.state}}" !-->
+                <li uib-dropdown ng-show="nav.isLoggedIn()" ng-repeat="option in nav.menu" ui-sref-active="active">
+                    <a href="#" class="dropdown-toggle"  uib-dropdown-toggle data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{option.tabText}}<span class="caret"></span></a>
+                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                        <li role="menuitem" ng-repeat="item in option.menuItems"><a ui-sref="{{item.state}}">{{item.itemText}}</a></li>
+                    </ul>
                 </li>
+                <!--</li> !-->
                 <li ng-show="nav.isAdmin()" ui-sref-active="active"><a ui-sref="admin">Admin</a></li>
             </ul>
 

@@ -2,7 +2,7 @@
     <h1>Create a Travel Route Request</h1>
 </header>
 
-<form class="form-horizontal" ng-submit="rc.createRequest()">
+<form class="form-horizontal" ng-submit="arc.createRequest()">
     <fieldset>
 
         <!-- Title input-->
@@ -12,7 +12,7 @@
             <div class="col-md-4">
                 <input id="textinput" name="textinput" type="text"
                        placeholder="What the title of you next journey should be?"
-                       class="form-control input-md" ng-model="rc.travelRequest.title">
+                       class="form-control input-md" ng-model="arc.travelRequest.title">
                 <!-- <span class="help-block">validation message placeholder?</span> !-->
             </div>
         </div>
@@ -24,7 +24,7 @@
             <div class="col-md-4">
                 <input id="textinput" name="textinput" type="text"
                        placeholder="What's the background of this Travel Route?"
-                       class="form-control input-md" ng-model="rc.travelRequest.description">
+                       class="form-control input-md" ng-model="arc.travelRequest.description">
                 <!-- <span class="help-block">validation message placeholder?</span> !-->
             </div>
         </div>
@@ -72,7 +72,7 @@
             <label class="col-md-4 control-label" for="locationinput">Location: </label>
 
             <div class="col-md-4">
-                <input id="locationinput" type="text" class="form-control" ng-model="rc.travelRequest.destination"
+                <input id="locationinput" type="text" class="form-control" ng-model="arc.travelRequest.destination"
                        placeholder="Enter place or city..." g-places-autocomplete>
                 <!-- <span class="help-block">validation message placeholder?</span> !-->
             </div>
