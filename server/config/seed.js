@@ -7,6 +7,7 @@
 import TravelRoute from '../api/travel-route/travel-route.model';
 import ItineraryItem from '../api/travel-route/itinerary-item.model';
 import User from '../api/user/user.model';
+import Message from '../api/message/message.model';
 
 TravelRoute.find({}).remove()
   .then(() => {
@@ -34,22 +35,33 @@ TravelRoute.find({}).remove()
       ]
     })
   });
-
 User.find({}).remove()
   .then(() => {
-    User.create({
-      provider: 'local',
-      name: 'Test User',
-      email: 'test@example.com',
-      password: 'test'
-    }, {
-      provider: 'local',
-      role: 'admin',
-      name: 'Admin',
-      email: 'admin@example.com',
-      password: 'admin'
+  User.create({
+  provider: 'local',
+  name: 'Test User',
+  email: 'test@example.com',
+  password: 'test'
+}, {
+  provider: 'local',
+  role: 'admin',
+  name: 'Admin',
+  email: 'admin@example.com',
+  password: 'admin'
+})
+  .then(() => {
+  console.log('finished populating users');
+});
+});
+
+Message.find({}).remove()
+  .then(() => {
+    Message.create({
+    from:'Paula',  
+    message:'test1'
     })
     .then(() => {
-      console.log('finished populating users');
+      console.log('finished populating messaging');
     });
   });
+
