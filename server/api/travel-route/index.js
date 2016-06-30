@@ -9,7 +9,7 @@ router.post('/search', controller.search);
 router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.get('/usr_trips/:us_id', controller.getUserTravelRoutes);
-router.get('/travellers/:tr_id', controller.getTravelRoutesTravelers);
+router.get('/travellers/:tr_id', controller.getTravelRoutesTravellers);
 
 router.post('/', controller.create);
 router.put('/:id', controller.update);
