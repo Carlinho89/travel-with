@@ -29,7 +29,37 @@
             </div>
         </div>
 
-        <!-- Itinerary Item Name-->
+        <!-- Itinerary List-->
+        <div class="col-md-8">
+            <h1>Add Stops on the Travel Route</h1>
+
+            <div class="center-table">
+                <table class="table table-striped">
+                    <thead>
+                    <th>Stop Name</th>
+                    <th>Location</th>
+                    <th>Date of Arrival</th>
+                    <th>Date of Departure</th>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="game in games">
+                        <td>{{game.name}}</td>
+                        <td>{{game.platform}}</td>
+                        <td>{{game.genre}}</td>
+                        <td>Delete</td>
+                    </tr>
+                    </tbody>
+                    <tr>
+                        <td><input type="text" ng-model="newGame.name"></td>
+                        <td><input type="text" ng-model="newGame.platform"></td>
+                        <td><input type="text" ng-model="newGame.genre"></td>
+                        <td>
+                            <button class="btn btn-primary" ng-click="addNewGame()">Add New</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
 
         <div class="form-group">
             <label class="col-md-4 control-label" for="textinput">Stop Name</label>

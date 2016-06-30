@@ -25,7 +25,7 @@
           console.log(response);
           thisRef.hasTravRout = true;
           thisRef.user.travelroutes = response.data;
-          thisRef.getTravelers(thisRef);
+          //thisRef.getTravelers(thisRef);
         },
         function(response){
           console.log('error');
