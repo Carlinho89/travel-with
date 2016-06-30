@@ -4,7 +4,6 @@
   class ListTravelRoutesComponent {
 
     constructor($http, $scope, Auth) {
-      console.log('ListTravelRoutesComponent');
       this.$http = $http;
 
       this.user = Auth.getCurrentUser();

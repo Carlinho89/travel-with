@@ -119,19 +119,33 @@ export function getUserTravelRoutes(req, res) {
 //Get All users of a travel route
 export function getTravelRoutesTravelers(req, res) {
   var tr_id = ObjectId(req.params.tr_id);
-  //var travelRoute = TravelRoute.find({"_id": tr_id}).exec()
+  console.log(tr_id);
+  var travelRoute = {};
+
+  TravelRoute.find({"_id": tr_id})
+    .exec(function (err, tr) {
+      if (err) return handleError(err);
+      travelRoute = tr;
+  });
+
+  console.log(travelRoute);
   //                                                  .then(respondWithResult(res))
   //                                                  .catch(handleError(res));;
-  //var travellers = [];
+  var travellers = [];
 
   //console.log(travelRoute);
 
-  /*travelRoute.travellers.forEach(function (traveller_id) {
+  travelRoute.travellers.forEach(function (traveller_id) {
     var tr_id = ObjectId(traveller_id);
-    var traveller = User.find({'_id' : tr_id}).exec();
+    var traveller;
+    User.find({'_id' : tr_id})
+      .exec(function (err, traveller) {
+        if (err) return handleError(err);
+        travellers.push(tr);
 
-    travellers.push(traveller);
+      });
   });
-  */
-  return null;//travellers;
+  console.log(travellers);
+
+  return travellers;
 }
