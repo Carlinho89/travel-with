@@ -2,6 +2,8 @@
 
 import _ from 'lodash';
 import TravelRoute from './travel-route.model';
+import User from '../user/user.model';
+
 
 var ObjectId = require('mongodb').ObjectID;
 
@@ -104,7 +106,7 @@ export function destroy(req, res) {
 
 // Get all TravelRouths of the current user
 
-export  function getUserTravelRoutes(req, res) {
+export function getUserTravelRoutes(req, res) {
 
   var userID = ObjectId(req.params.us_id);
 
@@ -113,4 +115,23 @@ export  function getUserTravelRoutes(req, res) {
   }).exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
+}
+//Get All users of a travel route
+export function getTravelRoutesTravelers(req, res) {
+  var tr_id = ObjectId(req.params.tr_id);
+  //var travelRoute = TravelRoute.find({"_id": tr_id}).exec()
+  //                                                  .then(respondWithResult(res))
+  //                                                  .catch(handleError(res));;
+  //var travellers = [];
+
+  //console.log(travelRoute);
+
+  /*travelRoute.travellers.forEach(function (traveller_id) {
+    var tr_id = ObjectId(traveller_id);
+    var traveller = User.find({'_id' : tr_id}).exec();
+
+    travellers.push(traveller);
+  });
+  */
+  return null;//travellers;
 }

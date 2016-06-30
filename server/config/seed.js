@@ -62,7 +62,8 @@ TravelRoute.find({}).remove()
                     }
                 }
             ],
-            requestor: carlo._id
+            requestor: carlo._id,
+          travellers: [test._id]
         })
     }).then(() => {
   TravelRoute.create({
@@ -87,7 +88,8 @@ TravelRoute.find({}).remove()
         }
       }
     ],
-    requestor: carlo._id
+    requestor: carlo._id,
+    travellers: [admin._id, test._id]
   })
 }).then(() => {
   TravelRoute.create({
@@ -112,7 +114,8 @@ TravelRoute.find({}).remove()
         }
       }
     ],
-    requestor: admin._id
+    requestor: admin._id,
+    travellers: [carlo._id, test._id]
   })
 }).then(() => {
   TravelRoute.create({
@@ -137,6 +140,7 @@ TravelRoute.find({}).remove()
         }
       }
     ],
-    requestor: test._id
+    requestor: test._id,
+    travellers: [carlo._id, admin._id]
   })
 });
