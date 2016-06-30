@@ -8,6 +8,8 @@ class LoginController {
 
     this.Auth = Auth;
     this.$state = $state;
+    this.user.email = "carlo@example.com";
+    this.user.password = "carlo";
   }
 
   login(form) {

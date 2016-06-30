@@ -1,83 +1,66 @@
 'use strict';
 (function(){
 
-class ListTravelRoutesComponent {
+  class ListTravelRoutesComponent {
+
     constructor($http, $scope, Auth) {
-        this.$http = $http;
-        $scope.fromDatePickerOpen = false;
-        $scope.toDatePickerOpen = false;
-        $scope.openFromDatePicker = () =>
-            $scope.fromDatePickerOpen = true;
-        $scope.openToDatePicker = () =>
-            $scope.toDatePickerOpen = true;
-        $scope.dateOptions = {
-            formatYear: 'yy',
-            maxDate: new Date(2020, 5, 22),
-            minDate: new Date,
-            startingDay: 1
-        };
-        // model for travel route
-        this.travelRequest = {};
-        this.travelRequest.title = "";
-        this.travelRequest.description = "";
-        this.travelRequest.requestor = Auth.getCurrentUser();
+      console.log('ListTravelRoutesComponent');
+      this.$http = $http;
 
-        this.travelRequest.itineraryItems = [];
-        // model for itinerary item
-        $scope.itineraryItem = {};
-        $scope.itineraryItem.name = "";
-        $scope.itineraryItem.startDate = new Date;
-        $scope.itineraryItem.endDate = new Date;
+      this.user = Auth.getCurrentUser();
+      this.user.travelroutes = [];
+      this.hasTravRout = false;
+      this.user.travellers = [];
+      this.getUserTravelRoutes(this.user._id);
 
-        this.travelRequest.getDTO = function () {
-            return {
-                title: this.title,
-                description: this.description,
-                itinerary: [
-                    {
-                        name: $scope.itineraryItem.name,
-                        startDate: $scope.itineraryItem.startDate,
-                        endDate: $scope.itineraryItem.endDate,
-                        location: {
-                            type: 'Point',
-                            coordinates: [12.123456, 13.134578]
-                        },
-                        likelihood: 'CAN'
-                    }
-                ],
-                requestor: this.requestor
-            };
-        };
+
     }
 
-    createRequest() {
+    getUserTravelRoutes(user_id){
+      var thisRef = this;
+      this.$http.get('/api/travelroutes/usr_trips/'+ user_id).then(
+        function(response){
+          // success callback
+          console.log('user has travel routes');
+          console.log(response);
+          thisRef.hasTravRout = true;
+          thisRef.user.travelroutes = response.data;
+          thisRef.getTravelers(thisRef);
+        },
+        function(response){
+          console.log('error');
+          console.log(response);
+          // failure callback
+        }
+      );
+    }
 
-        var request = this.travelRequest.getDTO();
-        console.log("current user is: ");
-        console.log(request.requestor);
-        console.log(request);
+    getTravelers(thisRef){
+      thisRef.user.travelroutes.forEach(function(tr) {
+        thisRef.$http.get('/api/travelroutes/travellers/'+tr._id).then(
+          function (response) {
+            //success
+            console.log("success");
+            console.log(response);
 
-        this.$http.post('/api/travelroutes', request).then(
-            function (response) {
-                console.log('successful search pongo');
-                console.log(response);
-                return response.data;
-            },
-            function (response) {
-                console.log('error');
-                console.log(response);
-                return response.data;
-                // failure callback
-            }
+          },
+          function (response) {
+            //failure
+            console.log("failure");
+            console.log(response);
+          }
         );
-
+      });
     }
+
   }
 
-angular.module('travelWithApp')
-  .component('listTravelRoutes', {
-    templateUrl: 'app/list-travel-routes/list-travel-routes.html',
-    controller: ListTravelRoutesComponent
-  });
+
+  angular.module('travelWithApp')
+    .component('listTravelRoutes', {
+      templateUrl: 'app/list-travel-routes/list-travel-routes.html',
+      controller: ListTravelRoutesComponent,
+      controllerAs: 'ltc'
+    });
 
 })();

@@ -1,1 +1,31 @@
-<div>This is the list-travel-routes view.</div>
+<div class="col-md-12">
+  <h1>{{ltc.user.name}}</h1>
+  <table class="table table-striped">
+    <thead>
+    <th>Name</th>
+    <th>Organizer</th>
+    <th>Description</th>
+    <th>Travellers</th>
+    </thead>
+    <tbody>
+    <tr ng-repeat="tr in ltc.user.travelroutes">
+      <td>{{tr.name}}</td>
+      <td>{{ltc.user.name}}</td>
+      <td>{{tr.description}}</td>
+      <td>
+        <p ng-repeat="traveller in ltc.user.travellers">
+            {{traveller.name}};
+        </p>
+      </td>
+    </tr>
+    </tbody>
+    <tr>
+      <td><input type="text" ng-model="newGame.name"></td>
+      <td><input type="text" ng-model="newGame.platform"></td>
+      <td><input type="text" ng-model="newGame.genre"></td>
+      <td>
+        <button class="btn btn-primary" ng-click="addNewGame()">Add New</button>
+      </td>
+    </tr>
+  </table>
+</div>
