@@ -117,7 +117,7 @@ export function getUserTravelRoutes(req, res) {
     .catch(handleError(res));
 }
 //Get All users of a travel route
-export function getTravelRoutesTravelers(req, res) {
+export function getTravelRoutesTravellers(req, res) {
   var tr_id = ObjectId(req.params.tr_id);
   console.log(tr_id);
   var travelRoute = {};
@@ -125,7 +125,9 @@ export function getTravelRoutesTravelers(req, res) {
   TravelRoute.find({"_id": tr_id})
     .exec(function (err, tr) {
       if (err) return handleError(err);
-      travelRoute = tr;
+      else {
+        travelRoute = tr;
+      }
   });
 
   console.log(travelRoute);
