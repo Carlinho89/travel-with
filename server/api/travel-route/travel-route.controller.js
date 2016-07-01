@@ -9,7 +9,7 @@ var ObjectId = require('mongodb').ObjectID;
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
-  return function(entity) {
+  return function (entity) {
     if (entity) {
       res.status(statusCode).json(entity);
     }
@@ -17,7 +17,7 @@ function respondWithResult(res, statusCode) {
 }
 
 function saveUpdates(updates) {
-  return function(entity) {
+  return function (entity) {
     var updated = _.merge(entity, updates);
     return updated.save()
       .then(updated => {
@@ -27,7 +27,7 @@ function saveUpdates(updates) {
 }
 
 function removeEntity(res) {
-  return function(entity) {
+  return function (entity) {
     if (entity) {
       return entity.remove()
         .then(() => {
@@ -38,7 +38,7 @@ function removeEntity(res) {
 }
 
 function handleEntityNotFound(res) {
-  return function(entity) {
+  return function (entity) {
     if (!entity) {
       res.status(404).end();
       return null;
@@ -49,7 +49,7 @@ function handleEntityNotFound(res) {
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
-  return function(err) {
+  return function (err) {
     res.status(statusCode).send(err);
   };
 }
@@ -62,7 +62,7 @@ export function index(req, res) {
 }
 export function search(req, res) {
 
-  return TravelRoute.find({itinerary: {$elemMatch : { startDate : {$gte: req.body.startingDate}}}}).exec()
+  return TravelRoute.find({itinerary: {$elemMatch: {startDate: {$gte: req.body.startingDate}}}}).exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -120,34 +120,35 @@ export function getUserTravelRoutes(req, res) {
 export function getTravelRoutesTravellers(req, res) {
   var tr_id = ObjectId(req.params.tr_id);
   console.log(tr_id);
-  var travelRoute = {};
 
-  TravelRoute.find({"_id": tr_id})
-    .exec(function (err, tr) {
-      if (err) return handleError(err);
-      else {
-        travelRoute = tr;
+  TravelRoute.findOne({"_id": tr_id})
+    .exec(function (err, travelRoute) {
+      if (err) {
+        console.log('Error');
+        return handleError(err);
       }
-  });
+      else {
+        var travellersObIds = [];
+        User.find({'_id': { $in : travelRoute.travellers}}).exec(function (err, travellers) {
+          if(err){
+            console.log('error in user query');
+            return handleError(res);
+          }
+          else {
+            console.log('travellers: ok');
+            console.log(travellers);
+            res.json(travellers);
+          }
 
-  console.log(travelRoute);
-  //                                                  .then(respondWithResult(res))
-  //                                                  .catch(handleError(res));;
-  var travellers = [];
+        });
 
-  //console.log(travelRoute);
 
-  travelRoute.travellers.forEach(function (traveller_id) {
-    var tr_id = ObjectId(traveller_id);
-    var traveller;
-    User.find({'_id' : tr_id})
-      .exec(function (err, traveller) {
-        if (err) return handleError(err);
-        travellers.push(tr);
+      }
+    });
 
-      });
-  });
-  console.log(travellers);
+}
 
-  return travellers;
+function getTravellers(travellerId) {
+  User.find({'_id': travellerId})
+    .exec();
 }
