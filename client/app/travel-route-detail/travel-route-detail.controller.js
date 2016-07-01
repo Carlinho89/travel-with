@@ -6,20 +6,24 @@
         constructor($http, $scope, $state) {
 
             var detailController = this;
-            var routeId = $state.params.routeId;
-            detailController.travelRoute = {
-                title: '',
-                description: '',
-                requestor: null,
-                itineraryItems: []
-            };
+            //var routeId = $state.params.routeId;
+            var routeId = '5776c09c28fd531c1efff34d';
+            detailController.travelRoute = {};
+            detailController.owner = {};
 
 
             $http.get('/api/travelroutes/' + routeId).then(
                 function (response) {
                     // success callback
-                    detailController.travelRoute = response;
+                    detailController.travelRoute = response.data;
                     console.log(detailController.travelRoute);
+                    $http.get('/api/users/' + response.data.requestor).then(function (user) {
+                        detailController.owner = user.data;
+                        console.log(detailController.owner)
+                    }, function (response) {
+                        console.log('error');
+                        console.log(response);
+                    });
                 },
                 function (response) {
                     console.log('error');

@@ -1,43 +1,19 @@
-<div>This is the travel-route-detail view.</div>
-<h1>{{drc.route.bla}}</h1>
 <form class="form-horizontal" ng-submit="arc.createRequest()">
     <fieldset>
-        <div class="col-md-6">
-            <h1>Create a Travel Route Request</h1>
-            <br>
-            <br>
-            <!-- Title input-->
-            <div class="form-group">
-                <label class="col-md-2 control-label" for="titleinput">Title: </label>
 
-                <div class="col-md-10">
-                    <input id="titleinput" name="titleinput" type="text"
-                           placeholder="What the title of you next journey should be?"
-                           class="form-control input-md" ng-model="arc.travelRequest.title">
-                    <!-- <span class="help-block">validation message placeholder?</span> !-->
-                </div>
-            </div>
-
-            <!-- Description input-->
-            <div class="form-group">
-                <label class="col-md-2 control-label" for="descriptioninput">Description: </label>
-
-                <div class="col-md-10">
-                    <textarea rows="5" id="descriptioninput" name="descriptioninput" type="text"
-                              placeholder="What's the background of this Travel Route?"
-                              class="form-control input-md" ng-model="arc.travelRequest.description"></textarea>
-                    <!-- <span class="help-block">validation message placeholder?</span> !-->
-                </div>
-            </div>
-            <br>
-
-            <h3>Add Stops on the Travel Route</h3>
-            <br>
-        </div>
         <div class="col-md-12">
             <div class="col-md-3">
             </div>
             <div class="col-md-8">
+                <br>
+                <p>Travel Route:</p>
+                <h1>{{drc.travelRoute.name}}</h1>
+                <br>
+                <p>Author:</p>
+                <p>{{drc.owner.name}}</p>
+                <p>Description:</p>
+                <p>{{drc.travelRoute.name}}</p>
+                <h3>Stops on this Travel Route:</h3>
                 <table class="table table-striped">
                     <thead>
                     <th>Stop Name</th>
@@ -47,41 +23,13 @@
                     <th></th>
                     </thead>
                     <tbody class="tbody">
-                    <tr ng-repeat="stop in itineraryItems">
+                    <tr ng-repeat="stop in drc.travelRoute.itinerary">
                         <td>{{stop.name}}</td>
                         <td>{{stop.location}}</td>
                         <td>{{stop.startDate}}</td>
                         <td>{{stop.endDate}}</td>
-                        <td>Delete</td>
                     </tr>
                     </tbody>
-                    <tr>
-                        <td><input id="textinput" name="textinput" type="text" placeholder="placeholder"
-                                   class="form-control input-md" ng-model="newItem.name"></td>
-                        <td><input id="locationinput" type="text" class="form-control"
-                                   ng-model="arc.travelRequest.destination"
-                                   placeholder="Enter place or city..." g-places-autocomplete></td>
-                        <td>
-                            <input type="text" class="form-control datepicker" uib-datepicker-popup="dd-MMMM-yyyy"
-                                   is-open="fromDatePickerOpen" ng-model="newItem.startDate"
-                                   datepicker-options="dateOptions" close-text="Close"/>
-
-                            <button type="button" class="btn btn-default" ng-click="openFromDatePicker()"><i
-                                    class="glyphicon glyphicon-calendar"></i></button>
-                        </td>
-                        <td><input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy"
-                                   is-open="toDatePickerOpen" ng-model="newItem.endDate"
-                                   datepicker-options="dateOptions" close-text="Close"/>
-
-                            <button type="button" class="btn btn-default" ng-click="openToDatePicker()"><i
-                                    class="glyphicon glyphicon-calendar"></i></button>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-primary add-stop" ng-click="addNewStop()">Add</button>
-                            <button type="button" class="btn btn-primary" ng-click="">Delete</button>
-
-                        </td>
-                    </tr>
                 </table>
             </div>
             <div class="col-md-2">
@@ -91,7 +39,7 @@
     </fieldset>
     <div class="col-md-12 submit">
         <div class="text-center">
-            <button type="submit" class="btn btn-primary create-tr" >Create Travel Route!</button>
+            <button type="button" class="btn btn-primary create-tr" >Join this Travel Route!</button>
         </div>
     </div>
 
