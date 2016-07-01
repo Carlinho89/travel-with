@@ -2,8 +2,31 @@
 (function () {
 
     class TravelRouteDetailComponent {
-        constructor(routeDetailService) {
-            this.route = routeDetailService;
+
+        constructor($http, $scope, $state) {
+
+            var detailController = this;
+            var routeId = $state.params.routeId;
+            detailController.travelRoute = {
+                title: '',
+                description: '',
+                requestor: null,
+                itineraryItems: []
+            };
+
+
+            $http.get('/api/travelroutes/' + routeId).then(
+                function (response) {
+                    // success callback
+                    detailController.travelRoute = response;
+                    console.log(detailController.travelRoute);
+                },
+                function (response) {
+                    console.log('error');
+                    console.log(response);
+                    // failure callback
+                }
+            );
         }
     }
 
