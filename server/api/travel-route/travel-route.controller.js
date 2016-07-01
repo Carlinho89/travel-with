@@ -58,7 +58,7 @@ export function index(req, res) {
 }
 export function search(req, res) {
 
-  return TravelRoute.find({itinerary: {$elemMatch : { startDate : {$gte: req.body.startingDate}}}}).exec()
+  return TravelRoute.find({itinerary: {$elemMatch :{$and :[{ startDate : {$gte: req.body.startingDate}},{ endDate : {$gte: req.body.startingDate}},{place: req.body.location.name}]}}}).exec()
   //return TravelRoute.find({itinerary: {$elemMatch :  {location:  { $near{type:"Point", coordinates:[11.0,12.0]}} }}}}).exec()
     .then(respondWithResult(res))
     .catch(handleError(res));

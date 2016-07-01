@@ -18,6 +18,8 @@ TravelRoute.find({}).remove()
           name: 'Stopover in BKK',
           startDate: new Date(2016, 7, 1),
           endDate: new Date(2016, 7, 11),
+          place:'Bangkok',
+          
           location: {
             type: "Point",
             coordinates: [11.0, 12.0]
@@ -27,6 +29,7 @@ TravelRoute.find({}).remove()
           name: 'Barhopping',
           startDate: new Date(2016, 7, 11),
           endDate: new Date(2016, 7, 14),
+          place: 'Bangkok',
           location: {
             type: "Point",
             coordinates: [10.0, 13.0]

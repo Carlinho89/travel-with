@@ -67,7 +67,7 @@
       this.hasSearched = true;
       console.log(this.hasSearched);
 var b=this;
-
+      this.mockData2=[];
       this.$http.post('/api/travelroutes/search', this.model.GetDTO())
     .then(
         function(response){
