@@ -14,6 +14,7 @@ var TravelRouteSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     },
+
     travellers: {
       type: [mongoose.Schema.Types.ObjectId],
       ref: 'User'

@@ -5,13 +5,14 @@
 
     constructor($http, $scope, Auth) {
       this.$http = $http;
-
+      this.$scope = $scope;
       this.user = Auth.getCurrentUser();
       this.user.travelroutes = [];
       this.hasTravRout = false;
       this.user.travellers = [];
       this.getUserTravelRoutes(this.user._id);
-
+      console.log('Done');
+      console.log(this.user.travelroutes);
 
     }
 
@@ -36,11 +37,18 @@
 
     getTravelers(thisRef){
       thisRef.user.travelroutes.forEach(function(tr) {
+        console.log('in 1');
+        console.log('travelroute name: ' + tr.name);
         thisRef.$http.get('/api/travelroutes/travellers/'+tr._id).then(
           function (response) {
             //success
             console.log("success");
             console.log(response);
+            tr.travellers = response.data;
+            console.log("thisRef:");
+            console.log(thisRef);
+            //thisRef.$scope.$apply();
+
 
           },
           function (response) {
