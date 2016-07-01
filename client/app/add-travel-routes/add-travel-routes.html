@@ -1,116 +1,96 @@
-<header class="hero-unit">
-    <h1>Create a Travel Route Request</h1>
-</header>
-
 <form class="form-horizontal" ng-submit="arc.createRequest()">
     <fieldset>
+        <div class="col-md-6">
+            <h1>Create a Travel Route Request</h1>
+            <br>
+            <br>
+            <!-- Title input-->
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="textinput">Title: </label>
 
-        <!-- Title input-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="textinput">Title: </label>
-
-            <div class="col-md-4">
-                <input id="textinput" name="textinput" type="text"
-                       placeholder="What the title of you next journey should be?"
-                       class="form-control input-md" ng-model="arc.travelRequest.title">
-                <!-- <span class="help-block">validation message placeholder?</span> !-->
+                <div class="col-md-10">
+                    <input id="textinput" name="textinput" type="text"
+                           placeholder="What the title of you next journey should be?"
+                           class="form-control input-md" ng-model="arc.travelRequest.title">
+                    <!-- <span class="help-block">validation message placeholder?</span> !-->
+                </div>
             </div>
-        </div>
 
-        <!-- Description input-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="textinput">Description: </label>
+            <!-- Description input-->
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="textinput">Description: </label>
 
-            <div class="col-md-4">
-                <input id="textinput" name="textinput" type="text"
-                       placeholder="What's the background of this Travel Route?"
-                       class="form-control input-md" ng-model="arc.travelRequest.description">
-                <!-- <span class="help-block">validation message placeholder?</span> !-->
+                <div class="col-md-10">
+                    <textarea rows="5" id="textinput" name="textinput" type="text"
+                           placeholder="What's the background of this Travel Route?"
+                           class="form-control input-md" ng-model="arc.travelRequest.description"></textarea>
+                    <!-- <span class="help-block">validation message placeholder?</span> !-->
+                </div>
             </div>
+            <br>
+
+            <h3>Add Stops on the Travel Route</h3>
+            <br>
         </div>
-
-        <!-- Itinerary List-->
-        <div class="col-md-8">
-            <h1>Add Stops on the Travel Route</h1>
-
-            <div class="center-table">
+        <div class="col-md-12">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-8">
                 <table class="table table-striped">
                     <thead>
                     <th>Stop Name</th>
                     <th>Location</th>
                     <th>Date of Arrival</th>
                     <th>Date of Departure</th>
+                    <th></th>
                     </thead>
-                    <tbody>
-                    <tr ng-repeat="game in games">
-                        <td>{{game.name}}</td>
-                        <td>{{game.platform}}</td>
-                        <td>{{game.genre}}</td>
+                    <tbody class="tbody">
+                    <tr ng-repeat="stop in itineraryItems">
+                        <td>{{stop.name}}</td>
+                        <td>{{stop.location}}</td>
+                        <td>{{stop.startDate}}</td>
+                        <td>{{stop.endDate}}</td>
                         <td>Delete</td>
                     </tr>
                     </tbody>
                     <tr>
-                        <td><input type="text" ng-model="newGame.name"></td>
-                        <td><input type="text" ng-model="newGame.platform"></td>
-                        <td><input type="text" ng-model="newGame.genre"></td>
+                        <td><input id="textinput" name="textinput" type="text" placeholder="placeholder"
+                                   class="form-control input-md" ng-model="newItem.name"></td>
+                        <td><input id="locationinput" type="text" class="form-control"
+                                   ng-model="arc.travelRequest.destination"
+                                   placeholder="Enter place or city..." g-places-autocomplete></td>
                         <td>
-                            <button class="btn btn-primary" ng-click="addNewGame()">Add New</button>
+                            <input type="text" class="form-control datepicker" uib-datepicker-popup="dd-MMMM-yyyy"
+                                   is-open="fromDatePickerOpen" ng-model="newItem.startDate"
+                                   datepicker-options="dateOptions" close-text="Close"/>
+
+                            <button type="button" class="btn btn-default" ng-click="openFromDatePicker()"><i
+                                    class="glyphicon glyphicon-calendar"></i></button>
+                        </td>
+                        <td><input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy"
+                                   is-open="toDatePickerOpen" ng-model="newItem.endDate"
+                                   datepicker-options="dateOptions" close-text="Close"/>
+
+                            <button type="button" class="btn btn-default" ng-click="openToDatePicker()"><i
+                                    class="glyphicon glyphicon-calendar"></i></button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary add-stop" ng-click="addNewStop()">Add</button>
+                            <button type="button" class="btn btn-primary" ng-click="">Delete</button>
+
                         </td>
                     </tr>
                 </table>
             </div>
-        </div>
-
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="textinput">Stop Name</label>
-
-            <div class="col-md-4">
-                <input id="textinput" name="textinput" type="text" placeholder="placeholder"
-                       class="form-control input-md" ng-model="itineraryItem.name">
-                <!-- <span class="help-block">validation message placeholder?</span> !-->
-            </div>
-        </div>
-
-        <!-- Travel Dates input-->
-
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="textinput">Time Period: </label>
-
             <div class="col-md-2">
-                <input type="text" class="form-control datepicker" uib-datepicker-popup="dd-MMMM-yyyy"
-                       ng-required="true"
-                       is-open="fromDatePickerOpen" ng-model="itineraryItem.startDate" datepicker-options="dateOptions"
-                       ng-required="true" close-text="Close"/>
-                <span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="openFromDatePicker()"><i
-                    class="glyphicon glyphicon-calendar"></i></button>
-          </span>
             </div>
-            <div class="col-md-2">
-                <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-required="true"
-                       is-open="toDatePickerOpen" ng-model="itineraryItem.startDate" datepicker-options="dateOptions"
-                       ng-required="true" close-text="Close"/>
-          <span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="openToDatePicker()"><i
-                    class="glyphicon glyphicon-calendar"></i></button>
-          </span>
-            </div>
-        </div>
-
-        <!-- Search input-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="locationinput">Location: </label>
-
-            <div class="col-md-4">
-                <input id="locationinput" type="text" class="form-control" ng-model="arc.travelRequest.destination"
-                       placeholder="Enter place or city..." g-places-autocomplete>
-                <!-- <span class="help-block">validation message placeholder?</span> !-->
-            </div>
-        </div>
-
-        <div class="text-center">
-            <button type="submit" class="btn btn-primary">Create Travel Route!</button>
         </div>
 
     </fieldset>
+    <div class="col-md-12 submit">
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Create Travel Route!</button>
+        </div>
+    </div>
+
 </form>
