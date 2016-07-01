@@ -2,8 +2,10 @@
 (function () {
 
     class AddTravelRoutesComponent {
-        constructor($http, $scope, Auth) {
+        constructor($http, $scope, $state, Auth, routeDetailService) {
             this.$http = $http;
+            this.$state = $state;
+            this.route = routeDetailService;
             $scope.fromDatePickerOpen = false;
             $scope.toDatePickerOpen = false;
             $scope.openFromDatePicker = () =>
@@ -41,7 +43,7 @@
                     requestor: this.requestor
                 };
             };
-            $scope.addNewStop = function() {
+            $scope.addNewStop = function () {
                 $scope.itineraryItems.push($scope.newItem);
                 console.log($scope.newItem);
                 $scope.newItem = {
@@ -58,10 +60,10 @@
         }
 
 
-
         createRequest() {
-
+            var travelRouteCtrl = this;
             var request = this.travelRequest.getDTO();
+            var state = this.$state;
             console.log('current user is: ');
             console.log(request.requestor);
             console.log(request);
@@ -70,7 +72,11 @@
                 function (response) {
                     console.log('successful POST TravelRoute');
                     console.log(response);
-                    return response.data;
+                    travelRouteCtrl.route.setId(ObjectId(response._id));
+                    console.log(travelRouteCtrl.route.id);
+                    state.go('travel-route-detail');
+                    //travelRouteCtrl.routeId = response._id
+
                 },
                 function (response) {
                     console.log('error');
