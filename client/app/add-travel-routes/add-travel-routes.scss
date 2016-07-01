@@ -1,0 +1,32 @@
+ .col-md-6,.col-md-7, .col-md-8, .col-md-9, .col-md-12 {
+  margin: 0 auto !important;
+  float: none !important;
+  text-align: left;
+}
+
+
+.form-horizontal .control-label {
+  text-align: left;
+}
+
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+  background-color: transparent;
+}
+
+.col-md-2 .buttons{
+  text-align: right;
+}
+
+ .col-md-12 .submit{
+   text-align: center;
+   margin: 0 auto !important;
+   float: none !important;
+ }
+
+.btn.btn-primary.add-stop {
+  background-color: #0f8a0f;
+  border-color: #357ebd;
+  color: #fff;
+  font-size: 20px;
+  width: 80px;
+}

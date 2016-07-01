@@ -13,53 +13,62 @@
             $scope.dateOptions = {
                 formatYear: 'yy',
                 maxDate: new Date(2020, 5, 22),
-                minDate: new Date,
+                minDate: new Date(),
                 startingDay: 1
             };
             // model for travel route
             this.travelRequest = {};
-            this.travelRequest.title = "";
-            this.travelRequest.description = "";
+            this.travelRequest.title = '';
+            this.travelRequest.description = '';
             this.travelRequest.requestor = Auth.getCurrentUser();
 
-            this.travelRequest.itineraryItems = [];
-            // model for itinerary item
-            $scope.itineraryItem = {};
-            $scope.itineraryItem.name = "";
-            $scope.itineraryItem.startDate = new Date;
-            $scope.itineraryItem.endDate = new Date;
+            $scope.itineraryItems = [];
+            $scope.newItem = {
+                name: '',
+                location: {
+                    type: 'Point',
+                    coordinates: [12.123456, 13.134578]
+                },
+                startDate: null,
+                endDate: null
+            };
 
             this.travelRequest.getDTO = function () {
                 return {
                     title: this.title,
                     description: this.description,
-                    itinerary: [
-                        {
-                            name: $scope.itineraryItem.name,
-                            startDate: $scope.itineraryItem.startDate,
-                            endDate: $scope.itineraryItem.endDate,
-                            location: {
-                                type: 'Point',
-                                coordinates: [12.123456, 13.134578]
-                            },
-                            likelihood: 'CAN'
-                        }
-                    ],
+                    itinerary: $scope.itineraryItems,
                     requestor: this.requestor
                 };
             };
+            $scope.addNewStop = function() {
+                $scope.itineraryItems.push($scope.newItem);
+                console.log($scope.newItem);
+                $scope.newItem = {
+                    name: '',
+                    location: {
+                        type: 'Point',
+                        coordinates: [12.123456, 13.134578]
+                    },
+                    startDate: null,
+                    endDate: null
+                };
+                console.log($scope.itineraryItems);
+            };
         }
+
+
 
         createRequest() {
 
             var request = this.travelRequest.getDTO();
-            console.log("current user is: ");
+            console.log('current user is: ');
             console.log(request.requestor);
             console.log(request);
 
             this.$http.post('/api/travelroutes', request).then(
                 function (response) {
-                    console.log('successful search pongo');
+                    console.log('successful POST TravelRoute');
                     console.log(response);
                     return response.data;
                 },
