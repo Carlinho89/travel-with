@@ -6,17 +6,17 @@
         constructor($http, $scope, Auth) {
             this.$http = $http;
             this.$scope = $scope;
-            this.user = Auth.getCurrentUser();
+            this.$scope.user = Auth.getCurrentUser();
             //TravelRoutes as Organizer
-            this.user.travelroutesAsOrganizer = [];
+            this.$scope.user.travelroutesAsOrganizer = [];
             //TravelRoutes as Traveller
-            this.user.travelroutesAsTraveller = [];
+            this.$scope.user.travelroutesAsTraveller = [];
             this.isOrganizer = false;
             this.isTraveller = false;
-            this.user.travellers = [];
-            this.getUserAsTravellerTravelRoutes(this.user._id);
-            this.getUserOrganizedTravelRoutes(this.user._id);
-
+            this.$scope.user.travellers = [];
+            console.log(this);
+            this.getUserOrganizedTravelRoutes(this.$scope.user._id);
+            this.getUserAsTravellerTravelRoutes(this.$scope.user._id);
         }
 
         getUserOrganizedTravelRoutes(user_id) {
@@ -28,26 +28,29 @@
                     thisRef.isOrganizer = (response.data.length > 0) ? true : false;
                     console.log('user has travel routes: '+ thisRef.isOrganizer);
 
-                    thisRef.user.travelroutesAsOrganizer = response.data;
+                    thisRef.$scope.user.travelroutesAsOrganizer = response.data;
                     thisRef.getTravelers(thisRef);
+
                 },
                 function (response) {
                     console.log('error');
                     console.log(response);
-                    // failure callback
+
+                  // failure callback
                 }
             );
         }
 
         getTravelers(thisRef) {
-            thisRef.user.travelroutesAsOrganizer.forEach(function (tr) {
+            thisRef.$scope.user.travelroutesAsOrganizer.forEach(function (tr) {
                 thisRef.$http.get('/api/travelroutes/travellers/' + tr._id).then(
                     function (response) {
                         //success
                         console.log("success");
                         //console.log(response);
                         tr.travellers = response.data;
-                        thisRef.user.travellers = tr.travellers
+                        thisRef.$scope.user.travellers = tr.travellers
+
                     },
                     function (response) {
                         //failure
@@ -59,15 +62,17 @@
         }
 
       deleteTravelRoute(index){
-        console.log('Delete travel route ' + this.user.travelroutesAsOrganizer[index].name + ' at index: ' + index);
-        var trName = this.user.travelroutesAsOrganizer[index].name;
+        console.log('Delete travel route ' + this.$scope.user.travelroutesAsOrganizer[index].name + ' at index: ' + index);
+        var trName = this.$scope.user.travelroutesAsOrganizer[index].name;
         var thisRef = this;
 
-        this.$http.delete('/api/travelroutes/' + this.user.travelroutesAsOrganizer[index]._id)
+        this.$http.delete('/api/travelroutes/' + this.$scope.user.travelroutesAsOrganizer[index]._id)
           .success(function(){
             console.log('Travel route ' + trName + '  at index: ' + index + ' was deleted');
 
-            thisRef.user.travelroutesAsOrganizer.splice(index, 1);
+            thisRef.$scope.user.travelroutesAsOrganizer.splice(index, 1);
+            thisRef.isOrganizer = (thisRef.$scope.user.travelroutesAsOrganizer.length > 0) ? true : false;
+
           })
           .error(function(err){
             alert('Error! Travel route ' + trName + ' was not deleted');
@@ -81,9 +86,9 @@
             // success callback
             console.log(response);
             thisRef.isTraveller = (response.data.length > 0) ? true : false;
-            thisRef.user.travelroutesAsTraveller = response.data;
+            thisRef.$scope.user.travelroutesAsTraveller = response.data;
             console.log('user is traveller: ' + thisRef.isTraveller);
-            //thisRef.getTravelers(thisRef);
+
           },
           function (response) {
             console.log('error');
@@ -96,8 +101,8 @@
 
       unsubscribeFromTravelRoute(index){
         var thisRef = this;
-        var travelroute = this.user.travelroutesAsTraveller[index];
-        var idAtIndex = travelroute.travellers.indexOf(this.user._id);
+        var travelroute = this.$scope.user.travelroutesAsTraveller[index];
+        var idAtIndex = travelroute.travellers.indexOf(this.$scope.user._id);
         travelroute.travellers.splice(idAtIndex,1);
 
         this.$http.put('/api/travelroutes/' + travelroute._id, travelroute)
@@ -105,21 +110,13 @@
             function(response){
               // success callback
               console.log('Travel route ' + travelroute.name + ' was updated');
-              console.log(response.data);
-              thisRef.user.travelroutesAsTraveller.splice(index, 1);
+              thisRef.$scope.user.travelroutesAsTraveller.splice(index, 1);
+              thisRef.isTraveller = (thisRef.$scope.user.travelroutesAsTraveller.length > 0) ? true : false;
             },
             function(response){
               alert('Error! Travel route ' + travelroute.name + ' was not updated');
             }
-          );/*
-        this.$http.put('/api/travelroutes/' + travelroute._id, travelroute).success(function(response){
-          console.log('Travel route ' + travelroute.name + ' was updated');
-
-          thisRef.user.travelroutesAsTraveller.splice(index, 1);
-        })
-          .error(function(err){
-            alert('Error! Travel route ' + travelroute.name + ' was not updated');
-          });*/
+          );
       }
     }
 
