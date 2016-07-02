@@ -98,13 +98,14 @@
         var thisRef = this;
         var travelroute = this.user.travelroutesAsTraveller[index];
         var idAtIndex = travelroute.travellers.indexOf(this.user._id);
+        travelroute.travellers.splice(idAtIndex,1);
 
         this.$http.put('/api/travelroutes/' + travelroute._id, travelroute)
           .then(
             function(response){
               // success callback
               console.log('Travel route ' + travelroute.name + ' was updated');
-
+              console.log(response.data);
               thisRef.user.travelroutesAsTraveller.splice(index, 1);
             },
             function(response){
