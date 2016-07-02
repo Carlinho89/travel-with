@@ -7,6 +7,12 @@ body {
   font-size: 18px;
 }
 
+.col-md-3 {
+  margin: 0 auto !important;
+  float: none !important;
+  text-align: left;
+}
+
 .thing-form {
   margin: 20px 0;
 }
@@ -53,17 +59,18 @@ body {
   font-size: 18px;
 }
 
-#travel-result-table {
-  background-color: black;
-  opacity: 0.4;
+
+#results-container {
+  padding-left: 20px;
+  background: rgb(54, 25, 25); /* Fall-back for browsers that don't
+                                    support rgba */
+  background: rgba(54, 25, 25, .7);
   margin-top: 20px;
+  color: white;
 }
 
-#left-container-div, #right-container-div {
-  padding-left: 20px;
-  background-color: black;
-  opacity: 0.4;
-  margin-top: 20px;
+#results-table {
+  text-align: center;
 }
 
 #profile-picture {

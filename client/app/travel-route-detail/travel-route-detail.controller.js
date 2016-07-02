@@ -6,8 +6,8 @@
         constructor($http, $scope, $state) {
 
             var detailController = this;
-            //var routeId = $state.params.routeId;
-            var routeId = '577783d0262a1b0019f41479';
+            var routeId = $state.params.routeId;
+            //var routeId = '577783d0262a1b0019f41479';
             detailController.travelRoute = {};
             detailController.owner = {};
 

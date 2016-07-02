@@ -1,86 +1,86 @@
 <header class="hero-unit" id="banner">
-  <div class="container">
-    <img border="0" src="/assets/images/logo.png" height="200px">
-    <p class="lead" style="font-size: 30px;">Join people travelling to your destination.</p>
-  </div>
+    <div class="container">
+        <img border="0" src="/assets/images/logo.png" height="200px">
+
+        <p class="lead" style="font-size: 30px;">Join people travelling to your destination.</p>
+    </div>
 </header>
 
-
-
 <div class="container">
-  <form class="t" ng-submit="vm.search()">
+    <form class="t" ng-submit="vm.search()">
 
-    <label>Where would you like to Travel?</label>
-    <div class="row">
-      <div>
-        <div class="form-group">
-          <input type="text" class="form-control" ng-model="vm.model.destination" placeholder="Enter place or city..."  g-places-autocomplete ng-required="true">
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-6">
-          <p class="input-group">
-            <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-required="true" is-open="fromDatePickerOpen" ng-model="vm.model.startingDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
-          <span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="openFromDatePicker()"><i class="glyphicon glyphicon-calendar"></i></button>
-          </span>
-          </p>
-        </div>
 
         <div class="col-md-6">
-          <p class="input-group">
-            <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-required="true" is-open="toDatePickerOpen" ng-model="vm.model.toDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
-          <span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="openToDatePicker()"><i class="glyphicon glyphicon-calendar"></i></button>
-          </span>
-          </p>
+            <label>Where would you like to Travel?</label>
+            <input type="text" class="form-control" ng-model="vm.model.destination" placeholder="Enter place or city..."
+                   g-places-autocomplete ng-required="true">
         </div>
-      </div>
-    </div>
+        <br>
 
-    <div class="text-center">
-      <button type="submit" class="btn btn-primary">Go</button>
-    </div>
-  </form>
 
-  <div class="row" ng-show="vm.hasSearched">
-    <div class="col-md-4" id="left-container-div" >
-      <h2 class="row" >
-        {{vm.model.destination.name}}
-      </h2>
-      <p class="row">
-        {{vm.model.startingDate | date:'yyyy-MM-dd' }} to {{vm.model.toDate | date:'yyyy-MM-dd'}}
-      </p>
-    </div>
-
-    <div class="col-md-8" id="right-container-div">
-      <table class="table">
-        <thead>
-        <tr>
-          <th>Name</th>
-          <th>Date</th>
-          <th>Likelihood</th>
-        </tr>
-        </thead>
-        <tbody>
-
-        <tr ng-repeat="mockD in vm.mockData2">
-          <td>
-            <div class="row" id="organizer">
-              {{mockD.name}}
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-2">
+                <p class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-required="true"
+                           is-open="fromDatePickerOpen" ng-model="vm.model.startingDate"
+                           datepicker-options="dateOptions" ng-required="true" close-text="Close"/>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="openFromDatePicker()"><i
+                    class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+                </p>
             </div>
-            <div class="row">
-              <img class="img-rounded" src="http://pickaface.net/includes/themes/clean/img/slide2.png" alt="Avatar" id="profile-picture">
-            </div>
-          </td>
-          <td>{{mockD.startDate | date:'yyyy-MM-dd'}} - {{mockD.endDate | date:'yyyy-MM-dd'}}</td>
-          <td>{{mockD.likelihood}}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
 
+            <div class="col-md-2">
+                <p class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-required="true"
+                           is-open="toDatePickerOpen" ng-model="vm.model.toDate" datepicker-options="dateOptions"
+                           ng-required="true" close-text="Close"/>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="openToDatePicker()"><i
+                    class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+                </p>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Go!</button>
+        </div>
+    </form>
+
+    <br>
+    <div class="col-md-12" id="results-container" ng-show="vm.hasSearched">
+        <br>
+
+        <h3 class="row">
+            Travel Routes including {{vm.model.destination.name}}:
+        </h3>
+        <br>
+        <table class="table" id="results-table">
+            <thead>
+            <tr>
+                <th>Name of the Stop:</th>
+                <th>Date</th>
+                <th>Likelihood</th>
+                <th>Belonging to Travel Route:</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr ng-repeat="item in vm.itineraryItems">
+                <td>{{item.name}}</td>
+                <td>From: {{item.startDate | date:'dd.MM.yyyy'}} to: {{item.endDate | date:'dd.MM.yyyy'}}</td>
+                <td>{{item.likelihood}}</td>
+                <td>{{item.routeName}}</td>
+                <td><button type="button" class="btn btn-primary create-tr" ng-click="vm.showDetails($index)" >See Travel Route</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
 </div>

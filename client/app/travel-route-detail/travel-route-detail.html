@@ -25,9 +25,9 @@
                     <tbody class="tbody">
                     <tr ng-repeat="stop in drc.travelRoute.itinerary">
                         <td>{{stop.name}}</td>
-                        <td>{{stop.location}}</td>
-                        <td>{{stop.startDate}}</td>
-                        <td>{{stop.endDate}}</td>
+                        <td>{{stop.place}}</td>
+                        <td>{{stop.startDate | date:'dd.MM.yyyy'}}</td>
+                        <td>{{stop.endDate | date:'dd.MM.yyyy'}}</td>
                     </tr>
                     </tbody>
                 </table>

@@ -72,9 +72,9 @@
                 function (response) {
                     console.log('successful POST TravelRoute');
                     console.log(response);
-                    travelRouteCtrl.route.setId(ObjectId(response._id));
-                    console.log(travelRouteCtrl.route.id);
-                    state.go('travel-route-detail');
+                    //travelRouteCtrl.route.setId(response._id);
+                    console.log(response.data._id);
+                    state.go('travel-route-detail', {routeId: response.data._id});
                     //travelRouteCtrl.routeId = response._id
 
                 },

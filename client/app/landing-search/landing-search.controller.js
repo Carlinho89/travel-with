@@ -1,105 +1,100 @@
 'use strict';
 
-(function() {
+(function () {
 
-  class LandingSearchController {
+    class LandingSearchController {
 
-    constructor($http, $scope) {
+        constructor($http, $scope, $state) {
 
-      this.mockData = [
-        {
-          organizer: 'Pavel S.',
-          travelers:['Filip Toll', 'Bob Smith', 'Andrea Agnelli'],
-          dates : [new Date("10-6-16"), new Date("10-16-16")]
-        },
-        { organizer: 'Carlo Di Domenico',
-          travelers:['John Doe', 'Max Powers', 'Enricos De Rios'],
-          dates : [new Date("10-7-16"), new Date("10-14-16")]
-        },
-        { organizer: 'Maja May',
-          travelers:['Marius Deam', 'Francis La Porta'],
-          dates : [new Date("10-7-16"), new Date("10-12-16")]
-        },
-        {
-          organizer: 'Dann Oliver',
-          travelers: ['John Doe', 'Max Powers', 'Andrea Agnelli'],
-          dates: [new Date("10-8-16"), new Date("10-18-16")]
+            this.itineraryItems = [];
+
+            this.model = {};
+            this.$http = $http;
+            this.state = $state;
+            $scope.fromDatePickerOpen = false;
+            $scope.toDatePickerOpen = false;
+            this.model.startingDate = new Date;
+            this.model.toDate = new Date;
+            $scope.openFromDatePicker = () => $scope.fromDatePickerOpen = true;
+            $scope.openToDatePicker = () => $scope.toDatePickerOpen = true;
+            $scope.dateOptions = {
+                formatYear: 'yy',
+                maxDate: new Date(2020, 5, 22),
+                minDate: new Date,
+                startingDay: 1
+            };
+            this.model.destination = null;
+
+            this.model.GetDTO = function () {
+                return {
+                    startingDate: this.startingDate,
+                    toDate: this.toDate,
+                    location: {
+                        lat: this.destination.geometry.location.lat(),
+                        lon: this.destination.geometry.location.lng(),
+                        name: this.destination.name
+                    }
+                };
+            };
+
+            this.hasSearched = false;
+
         }
-      ];
-      this.mockData2 = [];
 
-      this.model = {};
-      this.$http = $http;
-      $scope.fromDatePickerOpen = false;
-      $scope.toDatePickerOpen = false;
-      this.model.startingDate = new Date;
-      this.model.toDate = new Date;
-      $scope.openFromDatePicker = () => $scope.fromDatePickerOpen = true;
-      $scope.openToDatePicker = () => $scope.toDatePickerOpen = true;
-      $scope.dateOptions = {
-        formatYear: 'yy',
-        maxDate: new Date(2020, 5, 22),
-        minDate: new Date,
-        startingDay: 1
-      };
-      this.model.destination = null;
+        showDetails(index){
+            var clickedRoute = this.itineraryItems[index].routeId;
+            this.state.go('travel-route-detail', {routeId: clickedRoute});
+    };
 
-      this.model.GetDTO = function(){
-        return {
-        startingDate: this.startingDate,
-        toDate: this.toDate,
-        location: {
-          lat: this.destination.geometry.location.lat(),
-          lon: this.destination.geometry.location.lng(),
-          name: this.destination.name
+
+        search() {
+            console.log('Search Made');
+            this.hasSearched = true;
+            console.log(this.hasSearched);
+            var landingSearchCtrl = this;
+            this.$http.post('/api/travelroutes/search', this.model.GetDTO())
+                .then(
+                    function (response) {
+                        console.log('response');
+                        console.log(response.data);
+                        angular.forEach(response.data, function (travelRoute) {
+                            console.log('Travel Route:');
+                            console.log(travelRoute);
+                            angular.forEach(travelRoute.itinerary, function (itineraryItem) {
+                                var item = {};
+                                item.name = itineraryItem.name;
+                                item.startDate = itineraryItem.startDate;
+                                item.endDate = itineraryItem.endDate;
+                                item.likelihood = itineraryItem.likelihood;
+                                item.routeId = travelRoute._id;
+                                item.routeName = travelRoute.name;
+                                landingSearchCtrl.itineraryItems.push(item);
+                                console.log('Itinerary Item:');
+                                console.log(itineraryItem);
+
+                            });
+
+                        });
+
+                        // success callback
+
+
+                        return response.data;
+                    },
+                    function (response) {
+                        console.log('error')
+                        return response.data;
+                        // failure callback
+                    }
+                );
         }
-      };
-      };
-
-      this.hasSearched = false;
 
     }
 
-
-    search(){
-      console.log('Search Made');
-      this.hasSearched = true;
-      console.log(this.hasSearched);
-var b=this;
-      this.mockData2=[];
-      this.$http.post('/api/travelroutes/search', this.model.GetDTO())
-    .then(
-        function(response){
-
-          angular.forEach(response.data, function(item) {
-            angular.forEach(item.itinerary, function(item2) {
-              b.mockData2.push(item2);
-
-            });
-
-          });
-
-          // success callback
-
-
-
-
-          return response.data;
-        },
-        function(response){
-          console.log('error')
-          return response.data;
-          // failure callback
-        }
-      );
-    }
-
-  }
-
-  angular.module('travelWithApp')
-    .component('landingSearch', {
-      templateUrl: 'app/landing-search/landing-search.html',
-      controller: LandingSearchController,
-      controllerAs: 'vm'
-    });
+    angular.module('travelWithApp')
+        .component('landingSearch', {
+            templateUrl: 'app/landing-search/landing-search.html',
+            controller: LandingSearchController,
+            controllerAs: 'vm'
+        });
 })();
