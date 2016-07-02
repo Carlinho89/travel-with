@@ -11,9 +11,6 @@
             this.hasTravRout = false;
             this.user.travellers = [];
             this.getUserTravelRoutes(this.user._id);
-            console.log('Done');
-            console.log(this.user.travelroutes);
-
         }
 
         getUserTravelRoutes(user_id) {
@@ -48,9 +45,6 @@
                         thisRef.user.travellers = tr.travellers
                         console.log("thisRef:");
                         console.log(thisRef);
-                        //thisRef.$scope.$apply();
-
-
                     },
                     function (response) {
                         //failure
@@ -60,6 +54,22 @@
                 );
             });
         }
+
+      deleteTravelRoute(index){
+        console.log('Delete travel route ' + this.user.travelroutes[index].name + ' at index: ' + index);
+        var trName = this.user.travelroutes[index].name;
+        var thisRef = this;
+
+        this.$http.delete('/api/travelroutes/' + this.user.travelroutes[index]._id)
+          .success(function(){
+            console.log('Travel route ' + trName + '  at index: ' + index + ' was deleted');
+
+            thisRef.user.travelroutes.splice(index, 1);
+          })
+          .error(function(err){
+            alert('Error! Travel route ' + trName + ' was not deleted');
+          });
+      }
 
     }
 

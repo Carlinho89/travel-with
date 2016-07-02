@@ -6,6 +6,7 @@
     <th>Organizer</th>
     <th>Description</th>
     <th>Travellers</th>
+    <th>Action</th>
     </thead>
     <tbody>
     <tr ng-repeat="tr in ltc.user.travelroutes">
@@ -13,9 +14,12 @@
       <td>{{ltc.user.name}}</td>
       <td>{{tr.description}}</td>
       <td>
-        <p ng-repeat="traveller in ltc.user.travellers">
+        <p ng-repeat="traveller in tr.travellers">
             {{traveller.name}}
         </p>
+      </td>
+      <td>
+        <button class="btn btn-danger" ng-click="ltc.deleteTravelRoute($index)">Delete</button>
       </td>
     </tr>
     </tbody>
