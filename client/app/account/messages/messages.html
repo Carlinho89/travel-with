@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>Messages</h1>
+    </div>
+    <div class="col-sm-12">
+      <form class="form" name="form" ng-submit="vm.addMessage()" novalidate>
+
+
+          <label>Enter your message, and then press submit</label><br>
+
+          <input type="text" name="password" class="form-control" ng-model="vm.model.message"
+                 /> <br>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">Go</button>
+        </div>
+          <p class="help-block" ng-show="form.password.$error.mongoose">
+            {{ vm.errors.other }}
+          </p>
+        </div>
+
+    <div class="col-md-8" id="right-container-div">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Message</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr ng-repeat="msg in vm.messageData">
+          <td>
+            <div class="row" id="organizer">
+              {{msg.from}}
+            </div>
+            <div class="row">
+              <img class="img-rounded" src="http://pickaface.net/includes/themes/clean/img/slide2.png" alt="Avatar" id="profile-picture">
+            </div>
+          </td>
+          <td>{{msg.message}}</td>
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+
+
+        <p class="help-block"> {{ vm.message }} </p>
+
+
+      </form>
+    </div>
+  </div>
+</div>

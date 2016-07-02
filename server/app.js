@@ -11,17 +11,17 @@ import config from './config/environment';
 import http from 'http';
 
 // Connect to MongoDB
-//mongoose.connect(config.mongo.uri, config.mongo.options);
-//mongoose.connection.on('error', function(err) {
- // console.error('MongoDB connection error: ' + err);
- // process.exit(-1);
-//});
-var db=mongoose.connect(config.mongo.uri, config.mongo.options);
-mongoose.connection.on('open', function(){
-  mongoose.connection.db.dropDatabase(function(err){
-    console.log(err); // no err output
-  });
+mongoose.connect(config.mongo.uri, config.mongo.options);
+mongoose.connection.on('error', function(err) {
+console.error('MongoDB connection error: ' + err);
+ process.exit(-1);
 });
+//var db=mongoose.connect(config.mongo.uri, config.mongo.options);
+//mongoose.connection.on('open', function(){
+// mongoose.connection.db.dropDatabase(function(err){
+//  console.log(err); // no err output
+//});
+//});
 
 // Populate databases with sample data
 if (config.seedDB) { require('./config/seed'); }
