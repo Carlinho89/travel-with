@@ -8,8 +8,8 @@
             var detailController = this;
             this.$http = $http;
             var scope = $scope;
-            //var routeId = $state.params.routeId;
-            detailController.routeId = '5777efaf8b36b0c00802c145';
+            detailController.routeId = $state.params.routeId;
+            //detailController.routeId = '5777efaf8b36b0c00802c145';
             detailController.travelRoute = {};
             detailController.author = {};
             detailController.participants = [];
