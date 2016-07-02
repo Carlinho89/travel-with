@@ -1,5 +1,5 @@
 <div class="col-md-12" >
-  <h1>{{ltc.$scope.user.name}}'s Travels</h1>
+  <h1>{{ltc.user.name}}'s Travels</h1>
   <div class="col-md-12" ng-show="ltc.isOrganizer">
     <h3>Here you can see all of Travels you are organizing:</h3>
     <table class="table table-striped">
@@ -11,9 +11,9 @@
       <th>Action</th>
       </thead>
       <tbody>
-      <tr ng-repeat="tr in ltc.$scope.user.travelroutesAsOrganizer">
+      <tr ng-repeat="tr in ltc.user.travelroutesAsOrganizer">
         <td>{{tr.name}}</td>
-        <td>{{ltc.$scope.user.name}}</td>
+        <td>{{ltc.user.name}}</td>
         <td>{{tr.description}}</td>
         <td>
           <p ng-repeat="traveller in tr.travellers">
@@ -38,9 +38,9 @@
       <th>Action</th>
       </thead>
       <tbody>
-      <tr ng-repeat="tr in ltc.$scope.user.travelroutesAsTraveller">
+      <tr ng-repeat="tr in ltc.user.travelroutesAsTraveller">
         <td>{{tr.name}}</td>
-        <td></td>
+        <td>{{tr.requestor.name}}</td>
         <td>{{tr.description}}</td>
         <td>
           <p ng-repeat="traveller in tr.travellers">

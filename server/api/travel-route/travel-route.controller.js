@@ -174,4 +174,33 @@ export function getUserAsTravellerTravelRoutes(req, res){
 
 }
 
+//Get Organizer of a travel route
+export function getTravelRoutesRequestor(req, res) {
+  var tr_id = ObjectId(req.params.tr_id);
+  console.log(tr_id);
+
+  TravelRoute.findOne({"_id": tr_id})
+    .exec(function (err, travelRoute) {
+      if (err) {
+        console.log('Error');
+        return handleError(err);
+      }
+      else {
+        User.findOne({'_id': travelRoute.requestor}).exec(function (err, requestor) {
+          if(err){
+            console.log('error in user query');
+            return handleError(res);
+          }
+          else {
+            res.json(requestor);
+          }
+
+        });
+
+
+      }
+    });
+
+}
+
 
