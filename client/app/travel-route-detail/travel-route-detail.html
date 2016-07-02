@@ -1,4 +1,4 @@
-<form class="form-horizontal" ng-submit="arc.createRequest()">
+<form class="form-horizontal">
     <fieldset>
 
         <div class="col-md-12">
@@ -49,7 +49,7 @@
     </fieldset>
     <div class="col-md-12 submit">
         <div class="text-center">
-            <button type="button" class="btn btn-primary create-tr" ng-hide="drc.participating">Join this Travel
+            <button type="button" class="btn btn-primary create-tr" ng-hide="drc.participating" ng-click="drc.joinRoute()">Join this Travel
                 Route!
             </button>
         </div>

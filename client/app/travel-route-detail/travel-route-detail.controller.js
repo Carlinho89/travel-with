@@ -7,9 +7,9 @@
 
             var detailController = this;
             this.$http = $http;
-            var scope = $scope;
-            detailController.routeId = $state.params.routeId;
-            //detailController.routeId = '5777efaf8b36b0c00802c145';
+            this.auth = Auth;
+            //detailController.routeId = $state.params.routeId;
+            detailController.routeId = '577821da24d67ddc1ab87944';
             detailController.travelRoute = {};
             detailController.author = {};
             detailController.participants = [];
@@ -39,11 +39,12 @@
             );
 
         }
-        getParticipants(detailController){
+
+        getParticipants(detailController) {
             detailController.$http.get('/api/travelroutes/travellers/' + detailController.routeId).then(
                 function (participantsResponse) {
                     console.log('participants for detail page');
-                    participantsResponse.data.forEach(function(item){
+                    participantsResponse.data.forEach(function (item) {
                         detailController.participants.push(item);
                     });
                     if (detailController.user._id == detailController.author._id) {
@@ -61,6 +62,21 @@
                     console.log(response);
                 }
             );
+        }
+
+        joinRoute() {
+            this.travelRoute.travellers.push(this.auth.getCurrentUser()._id)
+            console.log('Updated Travel Route Object:');
+            console.log(this.travelRoute);
+            var detailCtrl = this;
+            this.$http.put('/api/travelroutes/' + this.travelRoute._id, this.travelRoute).then(function (updatedRoute) {
+                console.log('UPDATING TRAVEL ROUTE SUCCEDED');
+                console.log(updatedRoute.data.travellers);
+                detailCtrl.participants = updatedRoute.data.travellers;
+            }, function (err) {
+                console.log('UPDATING TRAVEL ROUTE FAILED');
+                console.log(err);
+            });
         }
 
     }
