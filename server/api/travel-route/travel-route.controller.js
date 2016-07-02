@@ -105,8 +105,7 @@ export function destroy(req, res) {
     .catch(handleError(res));
 }
 
-// Get all TravelRouths of the current user
-
+// Get all TravelRoutes organizef by the user
 export function getUserTravelRoutes(req, res) {
 
   var userID = ObjectId(req.params.us_id);
@@ -129,7 +128,6 @@ export function getTravelRoutesTravellers(req, res) {
         return handleError(err);
       }
       else {
-        var travellersObIds = [];
         User.find({'_id': { $in : travelRoute.travellers}}).exec(function (err, travellers) {
           if(err){
             console.log('error in user query');
@@ -149,7 +147,25 @@ export function getTravelRoutesTravellers(req, res) {
 
 }
 
-function getTravellers(travellerId) {
-  User.find({'_id': travellerId})
-    .exec();
+//Get all travel routes in which the user is registred as traveller
+export function getUserAsTravellerTravelRoutes(req, res){
+  var user_id = ObjectId(req.params.us_id);
+
+  TravelRoute.find({
+    'travellers' : user_id
+  }).exec(function (err, travelroutes) {
+    if(err){
+      console.log('error in query');
+      return handleError(res);
+    }
+    else {
+      console.log('travellers: ok');
+      console.log(travelroutes);
+      res.json(travelroutes);
+    }
+
+  });
+
 }
+
+

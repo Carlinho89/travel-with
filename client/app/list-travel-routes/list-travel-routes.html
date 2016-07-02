@@ -1,31 +1,63 @@
-<div class="col-md-12">
-  <h1>{{ltc.user.name}}</h1>
-  <table class="table table-striped">
-    <thead>
-    <th>Name</th>
-    <th>Organizer</th>
-    <th>Description</th>
-    <th>Travellers</th>
-    </thead>
-    <tbody>
-    <tr ng-repeat="tr in ltc.user.travelroutes">
-      <td>{{tr.name}}</td>
-      <td>{{ltc.user.name}}</td>
-      <td>{{tr.description}}</td>
-      <td>
-        <p ng-repeat="traveller in ltc.user.travellers">
+<div class="col-md-12" >
+  <h1>{{ltc.user.name}}'s Travels</h1>
+  <div class="col-md-12" ng-show="ltc.hasTravRout">
+    <h3>Here you can see all of Travels you are organizing:</h3>
+    <table class="table table-striped">
+      <thead>
+      <th>Name</th>
+      <th>Organizer</th>
+      <th>Description</th>
+      <th>Travellers</th>
+      <th>Action</th>
+      </thead>
+      <tbody>
+      <tr ng-repeat="tr in ltc.user.travelroutesAsOrganizer">
+        <td>{{tr.name}}</td>
+        <td>{{ltc.user.name}}</td>
+        <td>{{tr.description}}</td>
+        <td>
+          <p ng-repeat="traveller in tr.travellers">
             {{traveller.name}}
-        </p>
-      </td>
-    </tr>
-    </tbody>
-    <tr>
-      <td><input type="text" ng-model="newGame.name"></td>
-      <td><input type="text" ng-model="newGame.platform"></td>
-      <td><input type="text" ng-model="newGame.genre"></td>
-      <td>
-        <button class="btn btn-primary" ng-click="addNewGame()">Add New</button>
-      </td>
-    </tr>
-  </table>
+          </p>
+        </td>
+        <td>
+          <button class="btn btn-danger" ng-click="ltc.deleteTravelRoute($index)">Delete</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-12" ng-show="ltc.isTraveller">
+    <h3>Here you can see all of Travels you joined as traveller:</h3>
+    <table class="table table-striped">
+      <thead>
+      <th>Name</th>
+      <th>Organizer</th>
+      <th>Description</th>
+      <th>Travellers</th>
+      <th>Action</th>
+      </thead>
+      <tbody>
+      <tr ng-repeat="tr in ltc.user.travelroutesAsTraveller">
+        <td>{{tr.name}}</td>
+        <td></td>
+        <td>{{tr.description}}</td>
+        <td>
+          <p ng-repeat="traveller in tr.travellers">
+            {{traveller.name}}
+          </p>
+        </td>
+        <td>
+          <button class="btn btn-danger" ng-click="ltc.unsubscribeFromTravelRoute($index)">Unsubscribe</button>
+        </td>
+      </tr>
+      </tbody>
+      </table>
+  </div>
+
+  <div class="col-md-12" ng-hide="(ltc.isOrganizer)||(ltc.isTraveller)">
+    <h1>Sorry but you have no travels scheduled!!</h1>
+    <h3>Why not searching for one or organizing one yourself!</h3>
+  </div>
+
 </div>
