@@ -14,11 +14,11 @@
 
                 <p>Author:</p>
 
-                <p>{{drc.owner.name}}</p>
+                <p>{{owner.name}}</p>
 
                 <p>Description:</p>
 
-                <p>{{drc.travelRoute.name}}</p>
+                <p>{{drc.travelRoute.description}}</p>
 
                 <p>Participants:</p>
 
@@ -49,7 +49,9 @@
     </fieldset>
     <div class="col-md-12 submit">
         <div class="text-center">
-            <button type="button" class="btn btn-primary create-tr">Join this Travel Route!</button>
+            <button type="button" class="btn btn-primary create-tr" ng-hide="drc.participating">Join this Travel
+                Route!
+            </button>
         </div>
     </div>
 

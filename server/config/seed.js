@@ -65,7 +65,7 @@ TravelRoute.find({}).remove()
                 }
             ],
             requestor: carlo._id,
-            travellers: [test._id]
+            travellers: [admin._id]
         })
     })
     .then(() => {
