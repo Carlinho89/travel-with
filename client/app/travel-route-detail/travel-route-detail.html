@@ -6,13 +6,24 @@
             </div>
             <div class="col-md-8">
                 <br>
+
                 <p>Travel Route:</p>
+
                 <h1>{{drc.travelRoute.name}}</h1>
                 <br>
+
                 <p>Author:</p>
+
                 <p>{{drc.owner.name}}</p>
+
                 <p>Description:</p>
+
                 <p>{{drc.travelRoute.name}}</p>
+
+                <p>Participants:</p>
+
+                <p ng-repeat="participant in drc.participants">{{participant.name}}</p>
+
                 <h3>Stops on this Travel Route:</h3>
                 <table class="table table-striped">
                     <thead>
@@ -20,7 +31,6 @@
                     <th>Location</th>
                     <th>Date of Arrival</th>
                     <th>Date of Departure</th>
-                    <th></th>
                     </thead>
                     <tbody class="tbody">
                     <tr ng-repeat="stop in drc.travelRoute.itinerary">
@@ -39,7 +49,7 @@
     </fieldset>
     <div class="col-md-12 submit">
         <div class="text-center">
-            <button type="button" class="btn btn-primary create-tr" >Join this Travel Route!</button>
+            <button type="button" class="btn btn-primary create-tr">Join this Travel Route!</button>
         </div>
     </div>
 
