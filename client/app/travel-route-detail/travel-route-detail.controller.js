@@ -7,7 +7,7 @@
 
             var detailController = this;
             //var routeId = $state.params.routeId;
-            var routeId = '5776c09c28fd531c1efff34d';
+            var routeId = '577783d0262a1b0019f41479';
             detailController.travelRoute = {};
             detailController.owner = {};
 

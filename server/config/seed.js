@@ -12,18 +12,18 @@ import Message from '../api/message/message.model';
 User.find({}).remove();
 
 var test = new User({
-  provider: 'local',
-  name: 'Test',
-  email: 'test@example.com',
-  password: 'test'
+    provider: 'local',
+    name: 'Test',
+    email: 'test@example.com',
+    password: 'test'
 });
 
 var admin = new User({
-  provider: 'local',
-  role: 'admin',
-  name: 'Admin',
-  email: 'admin@example.com',
-  password: 'admin'
+    provider: 'local',
+    role: 'admin',
+    name: 'Admin',
+    email: 'admin@example.com',
+    password: 'admin'
 });
 
 var carlo = new User({
@@ -38,7 +38,6 @@ admin.save();
 carlo.save();
 
 
-
 TravelRoute.find({}).remove()
     .then(() => {
         TravelRoute.create({
@@ -48,7 +47,7 @@ TravelRoute.find({}).remove()
                     name: 'Stopover in BKK',
                     startDate: new Date(2016, 7, 1),
                     endDate: new Date(2016, 7, 11),
-                    place:'Bangkok',
+                    place: 'Bangkok',
                     location: {
                         type: "Point",
                         coordinates: [12.123456, 13.134578]
@@ -66,142 +65,142 @@ TravelRoute.find({}).remove()
                 }
             ],
             requestor: carlo._id,
-          travellers: [test._id]
+            travellers: [test._id]
         })
     }).then(() => {
-  TravelRoute.create({
-    name: "Italy's finest",
-    itinerary: [
-      {
-        name: 'Stopover in BKK',
-        startDate: new Date(2016, 7, 1),
-        endDate: new Date(2016, 7, 11),
-        location: {
-          type: "Point",
-          coordinates: [12.123456, 13.134578]
-        }
-      },
-      {
-        name: 'Barhopping',
-        startDate: new Date(2016, 7, 11),
-        endDate: new Date(2016, 7, 14),
-        location: {
-          type: "Point",
-          coordinates: [10.123456, 13.134578]
-        }
-      }
-    ],
-    requestor: carlo._id,
-    travellers: [admin._id, test._id]
-  })
-}).then(() => {
-  TravelRoute.create({
-    name: "Spain's finest",
-    itinerary: [
-      {
-        name: 'Stopover in BKK',
-        startDate: new Date(2016, 7, 1),
-        endDate: new Date(2016, 7, 11),
-        location: {
-          type: "Point",
-          coordinates: [12.123456, 13.134578]
-        }
-      },
-      {
-        name: 'Barhopping',
-        startDate: new Date(2016, 7, 11),
-        endDate: new Date(2016, 7, 14),
-        location: {
-          type: "Point",
-          coordinates: [10.123456, 13.134578]
-        }
-      }
-    ],
-    requestor: admin._id,
-    travellers: [carlo._id, test._id]
-  })
-}).then(() => {
-  TravelRoute.create({
-    name: "Napoli's finest",
-    itinerary: [
-      {
-        name: 'Stopover in BKK',
-        startDate: new Date(2016, 7, 1),
-        endDate: new Date(2016, 7, 11),
-        location: {
-          type: "Point",
-          coordinates: [12.123456, 13.134578]
-        }
-      },
-      {
-        name: 'Barhopping',
-        startDate: new Date(2016, 7, 11),
-        endDate: new Date(2016, 7, 14),
-        location: {
-          type: "Point",
-          coordinates: [10.123456, 13.134578]
-        }
-      }
-    ],
-    requestor: test._id,
-    travellers: [carlo._id, admin._id]
-  })
-});
-  .then(() => {
     TravelRoute.create({
-      name: "Bangkok's finest",
-      itinerary: [
-        {
-          name: 'Stopover in BKK',
-          startDate: new Date(2016, 7, 1),
-          endDate: new Date(2016, 7, 11),
-          place:'Bangkok',
-
-          location: {
-            type: "Point",
-            coordinates: [11.0, 12.0]
-          }
-        },
-        {
-          name: 'Barhopping',
-          startDate: new Date(2016, 7, 11),
-          endDate: new Date(2016, 7, 14),
-          place: 'Bangkok',
-          location: {
-            type: "Point",
-            coordinates: [10.0, 13.0]
-          }
-        }
-      ]
+        name: "Italy's finest",
+        itinerary: [
+            {
+                name: 'Stopover in BKK',
+                startDate: new Date(2016, 7, 1),
+                endDate: new Date(2016, 7, 11),
+                location: {
+                    type: "Point",
+                    coordinates: [12.123456, 13.134578]
+                }
+            },
+            {
+                name: 'Barhopping',
+                startDate: new Date(2016, 7, 11),
+                endDate: new Date(2016, 7, 14),
+                location: {
+                    type: "Point",
+                    coordinates: [10.123456, 13.134578]
+                }
+            }
+        ],
+        requestor: carlo._id,
+        travellers: [admin._id, test._id]
     })
-  });
-User.find({}).remove()
-  .then(() => {
-  User.create({
-  provider: 'local',
-  name: 'Test User',
-  email: 'test@example.com',
-  password: 'test'
-}, {
-  provider: 'local',
-  role: 'admin',
-  name: 'Admin',
-  email: 'admin@example.com',
-  password: 'admin'
-})
-  .then(() => {
-  console.log('finished populating users');
-});
-});
-
-Message.find({}).remove()
-  .then(() => {
-    Message.create({
-    from:'Paula',
-    message:'test1'
+}).then(() => {
+    TravelRoute.create({
+        name: "Spain's finest",
+        itinerary: [
+            {
+                name: 'Stopover in BKK',
+                startDate: new Date(2016, 7, 1),
+                endDate: new Date(2016, 7, 11),
+                location: {
+                    type: "Point",
+                    coordinates: [12.123456, 13.134578]
+                }
+            },
+            {
+                name: 'Barhopping',
+                startDate: new Date(2016, 7, 11),
+                endDate: new Date(2016, 7, 14),
+                location: {
+                    type: "Point",
+                    coordinates: [10.123456, 13.134578]
+                }
+            }
+        ],
+        requestor: admin._id,
+        travellers: [carlo._id, test._id]
+    })
+}).then(() => {
+        TravelRoute.create({
+            name: "Napoli's finest",
+            itinerary: [
+                {
+                    name: 'Stopover in BKK',
+                    startDate: new Date(2016, 7, 1),
+                    endDate: new Date(2016, 7, 11),
+                    location: {
+                        type: "Point",
+                        coordinates: [12.123456, 13.134578]
+                    }
+                },
+                {
+                    name: 'Barhopping',
+                    startDate: new Date(2016, 7, 11),
+                    endDate: new Date(2016, 7, 14),
+                    location: {
+                        type: "Point",
+                        coordinates: [10.123456, 13.134578]
+                    }
+                }
+            ],
+            requestor: test._id,
+            travellers: [carlo._id, admin._id]
+        })
     })
     .then(() => {
-      console.log('finished populating messaging');
+        TravelRoute.create({
+            name: "Bangkok's finest",
+            itinerary: [
+                {
+                    name: 'Stopover in BKK',
+                    startDate: new Date(2016, 7, 1),
+                    endDate: new Date(2016, 7, 11),
+                    place: 'Bangkok',
+
+                    location: {
+                        type: "Point",
+                        coordinates: [11.0, 12.0]
+                    }
+                },
+                {
+                    name: 'Barhopping',
+                    startDate: new Date(2016, 7, 11),
+                    endDate: new Date(2016, 7, 14),
+                    place: 'Bangkok',
+                    location: {
+                        type: "Point",
+                        coordinates: [10.0, 13.0]
+                    }
+                }
+            ]
+        })
     });
-  });
+User.find({}).remove()
+    .then(() => {
+        User.create({
+                provider: 'local',
+                name: 'Test User',
+                email: 'test@example.com',
+                password: 'test'
+            }, {
+                provider: 'local',
+                role: 'admin',
+                name: 'Admin',
+                email: 'admin@example.com',
+                password: 'admin'
+            })
+            .then(() => {
+                console.log('finished populating users');
+            });
+    });
+
+Message.find({}).remove()
+    .then(() => {
+        Message.create({
+                from: 'Paula',
+                message: 'test1'
+            })
+            .then(() => {
+                console.log('finished populating messaging');
+            });
+    });
 
