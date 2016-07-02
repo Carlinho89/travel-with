@@ -1,6 +1,6 @@
 <div class="col-md-12" >
   <h1>{{ltc.user.name}}'s Travels</h1>
-  <div class="col-md-12" ng-show="ltc.hasTravRout">
+  <div class="col-md-12" ng-show="ltc.isOrganizer">
     <h3>Here you can see all of Travels you are organizing:</h3>
     <table class="table table-striped">
       <thead>
@@ -40,7 +40,7 @@
       <tbody>
       <tr ng-repeat="tr in ltc.user.travelroutesAsTraveller">
         <td>{{tr.name}}</td>
-        <td></td>
+        <td>{{tr.requestor.name}}</td>
         <td>{{tr.description}}</td>
         <td>
           <p ng-repeat="traveller in tr.travellers">

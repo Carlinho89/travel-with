@@ -9,6 +9,8 @@ router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.get('/usr_trips/:us_id', controller.getUserTravelRoutes);
 router.get('/travellers/:tr_id', controller.getTravelRoutesTravellers);
+router.get('/organizer/:tr_id', controller.getTravelRoutesRequestor);
+
 router.get('/astraveller/:us_id', controller.getUserAsTravellerTravelRoutes);
 
 

@@ -87,14 +87,24 @@ export function create(req, res) {
 
 // Updates an existing Thing in the DB
 export function update(req, res) {
-  if (req.body._id) {
-    delete req.body._id;
-  }
-  return TravelRoute.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(saveUpdates(req.body))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+  console.log('update!:');
+  var travelRequestID = req.body._id;
+  console.log('finding by id');
+
+  TravelRoute.findById(travelRequestID).exec(function (err, tr) {
+    if (err){
+      return handleError(res);
+    }
+    else {
+      console.log('updating');
+      tr.remove();
+      var updatedTr = new TravelRoute(req.body);
+      console.log('updated');
+      console.log(updatedTr);
+      updatedTr.save();
+      res.send(updatedTr);
+    }
+  });
 }
 
 // Deletes a Thing from the DB
@@ -134,8 +144,6 @@ export function getTravelRoutesTravellers(req, res) {
             return handleError(res);
           }
           else {
-            console.log('travellers: ok');
-            console.log(travellers);
             res.json(travellers);
           }
 
@@ -159,12 +167,40 @@ export function getUserAsTravellerTravelRoutes(req, res){
       return handleError(res);
     }
     else {
-      console.log('travellers: ok');
       console.log(travelroutes);
       res.json(travelroutes);
     }
 
   });
+
+}
+
+//Get Organizer of a travel route
+export function getTravelRoutesRequestor(req, res) {
+  var tr_id = ObjectId(req.params.tr_id);
+  console.log(tr_id);
+
+  TravelRoute.findOne({"_id": tr_id})
+    .exec(function (err, travelRoute) {
+      if (err) {
+        console.log('Error');
+        return handleError(err);
+      }
+      else {
+        User.findOne({'_id': travelRoute.requestor}).exec(function (err, requestor) {
+          if(err){
+            console.log('error in user query');
+            return handleError(res);
+          }
+          else {
+            res.json(requestor);
+          }
+
+        });
+
+
+      }
+    });
 
 }
 
