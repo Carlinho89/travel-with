@@ -28,6 +28,7 @@
             this.currentStartDate = new Date();
             this.currentEndDate = new Date();
             this.currentLikelihood = "It's a Must!";
+            this.likelihood = '';
             this.likelihoodOptions = [
                 "It's a Must!",
                 "Can be included, doesn't has to",
@@ -37,13 +38,12 @@
 
             $scope.itineraryItems = [];
             this.getItineraryItem = function(){
-                var likelyhood = '';
                 if(this.currentLikelihood == "It's a Must!"){
-                    likelyhood = 'MUST';
+                    this.likelihood = 'MUST';
                 } else if(this.currentLikelihood == "Can be included, doesn't has to"){
-                    likelyhood = 'CAN';
+                    this.likelihood = 'CAN';
                 } else if(this.currentLikelihood == "Probably not included, but negotiable!"){
-                    likelyhood = 'PROBABLYNOT';
+                    this.likelihood = 'PROBABLYNOT';
                 }
                 return {
                     name: this.currentStopName,
@@ -54,7 +54,7 @@
                     place: this.currentLocation.name,
                     startDate: this.currentStartDate,
                     endDate: this.currentEndDate,
-                    likelihood: 'MUST'
+                    likelihood: this.likelihood
                 };
             }
 
