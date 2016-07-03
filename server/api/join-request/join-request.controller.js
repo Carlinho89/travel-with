@@ -103,7 +103,7 @@ export function destroy(req, res) {
 
 export function getRequest(req, res) {
     console.log("ich bin hier");
-    return JoinRequest.find({receiver: req.body.receiver}).exec()
+    return JoinRequest.find({route: req.body.route,requestor: req.body.requestor}).exec()
         .then(handleEntityNotFound(res))
         .then(respondWithResult(res))
         .catch(handleError(res));
