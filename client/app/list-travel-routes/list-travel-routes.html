@@ -9,6 +9,7 @@
       <th>Description</th>
       <th>Travellers</th>
       <th>Action</th>
+      <th></th>
       </thead>
       <tbody>
       <tr ng-repeat="tr in ltc.user.travelroutesAsOrganizer">
@@ -24,6 +25,7 @@
         <td>
           <button class="btn btn-danger" ng-click="ltc.deleteTravelRoute($index)">Delete</button>
         </td>
+        <td><button type="button" class="btn btn-primary create-tr" ng-click="ltc.showDetailsOwn($index)" >Details</button></td>
       </tr>
       </tbody>
     </table>
@@ -37,6 +39,8 @@
       <th>Description</th>
       <th>Travellers</th>
       <th>Action</th>
+      <th></th>
+
       </thead>
       <tbody>
       <tr ng-repeat="tr in ltc.user.travelroutesAsTraveller">
@@ -53,6 +57,7 @@
         <td>
           <button class="btn btn-danger" ng-click="ltc.unsubscribeFromTravelRoute($index)">Unsubscribe</button>
         </td>
+        <td><button type="button" class="btn btn-primary create-tr" ng-click="ltc.showDetailsJoined($index)" >Details</button></td>
       </tr>
       </tbody>
       </table>
