@@ -9,20 +9,23 @@
       <th>Description</th>
       <th>Travellers</th>
       <th>Action</th>
+      <th></th>
       </thead>
       <tbody>
       <tr ng-repeat="tr in ltc.user.travelroutesAsOrganizer">
         <td>{{tr.name}}</td>
-        <td>{{ltc.user.name}}</td>
+        <td>
+          <a ui-sref="user-detail({ userID: ltc.user._id })">{{ltc.user.name}}</a>
         <td>{{tr.description}}</td>
         <td>
           <p ng-repeat="traveller in tr.travellers">
-            {{traveller.name}}
+            <a ui-sref="user-detail({ userID: traveller._id })">{{traveller.name}}</a>
           </p>
         </td>
         <td>
           <button class="btn btn-danger" ng-click="ltc.deleteTravelRoute($index)">Delete</button>
         </td>
+        <td><button type="button" class="btn btn-primary create-tr" ng-click="ltc.showDetailsOwn($index)" >Details</button></td>
       </tr>
       </tbody>
     </table>
@@ -36,20 +39,25 @@
       <th>Description</th>
       <th>Travellers</th>
       <th>Action</th>
+      <th></th>
+
       </thead>
       <tbody>
       <tr ng-repeat="tr in ltc.user.travelroutesAsTraveller">
         <td>{{tr.name}}</td>
-        <td>{{tr.requestor.name}}</td>
+        <td>
+          <a ui-sref="user-detail({ userID: tr.requestor._id })">{{tr.requestor.name}}</a>
+        </td>
         <td>{{tr.description}}</td>
         <td>
           <p ng-repeat="traveller in tr.travellers">
-            {{traveller.name}}
+            <a ui-sref="user-detail({ userID: traveller._id })">{{traveller.name}}</a>
           </p>
         </td>
         <td>
           <button class="btn btn-danger" ng-click="ltc.unsubscribeFromTravelRoute($index)">Unsubscribe</button>
         </td>
+        <td><button type="button" class="btn btn-primary create-tr" ng-click="ltc.showDetailsJoined($index)" >Details</button></td>
       </tr>
       </tbody>
       </table>

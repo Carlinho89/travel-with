@@ -7,14 +7,16 @@
             <div class="col-md-8">
                 <br>
 
-                <p>Travel Route:</p>
+                <p ng-show="drc.isAuthor">Travel Route (created by you):</p>
+                <p ng-hide="drc.isAuthor">Travel Route:</p>
 
                 <h1>{{drc.travelRoute.name}}</h1>
                 <br>
 
                 <p>Author:</p>
 
-                <p>{{drc.author.name}}</p>
+                <p ng-hide="drc.isAuthor">{{drc.author.name}}</p>
+                <p ng-show="drc.isAuthor">You</p>
 
                 <p>Description:</p>
 
@@ -47,11 +49,15 @@
         </div>
 
     </fieldset>
-    <div class="col-md-12 submit">
+    <div class="col-md-12 submit" ng-hide="drc.isAuthor">
+        <br>
+        <br>
         <div class="text-center">
-            <button type="button" class="btn btn-primary create-tr" ng-hide="drc.participating" ng-click="drc.joinRoute()">Join this Travel
+            <button type="button" class="btn btn-primary create-tr" ng-hide="drc.requestSent || drc.participating" ng-click="drc.joinRoute()">Join this Travel
                 Route!
             </button>
+            <p ng-show="drc.requestSent">You already have a pending join request for this route</p>
+            <p ng-show="drc.participating">You are already part of this awesome travel route!</p>
         </div>
     </div>
 

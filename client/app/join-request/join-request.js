@@ -3,11 +3,11 @@
 angular.module('travelWithApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('travel-route-detail', {
-                url: '/travel-route-detail',
+            .state('join-request', {
+                url: '/join-request',
                 params: {
                     routeId: null
                 },
-                template: '<travel-route-detail></travel-route-detail>'
+                template: '<join-request></join-request>'
             });
     });

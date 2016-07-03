@@ -3,18 +3,21 @@
 
     class TravelRouteDetailComponent {
 
-        constructor($http, $scope, $state, Auth, $rootScope) {
+        constructor($http, $state, Auth) {
 
             var detailController = this;
             this.$http = $http;
             this.auth = Auth;
+            this.$state = $state;
             detailController.routeId = $state.params.routeId;
-            //detailController.routeId = '5778d5f2c9cda4401a0661f5';
+            //detailController.routeId = '57793aa168c9949c10df9a63';
             detailController.travelRoute = {};
             detailController.author = {};
             detailController.participants = [];
             detailController.user = Auth.getCurrentUser();
             detailController.participating = false;
+            detailController.requestSent = false;
+            detailController.isAuthor = false;
 
 
             $http.get('/api/travelroutes/' + detailController.routeId).then(
@@ -23,9 +26,13 @@
                     console.log(detailController.travelRoute);
                     $http.get('/api/users/' + travelRouteResponse.data.requestor).then(function (user) {
                         detailController.author = user.data;
+                        if(detailController.author._id == detailController.user._id){
+                            detailController.isAuthor = true;
+                        }
                         console.log('owner in ctrl:');
                         console.log(detailController.author);
                         detailController.getParticipants();
+                        detailController.getAlreadyRequested();
                     }, function (response) {
                         console.log('FAILED TO LOAD REQUESTER FOR ROUTE ID: ' + detailController.routeId);
                         console.log(response);
@@ -65,35 +72,30 @@
             );
         }
 
-        joinRoute() {
-            this.travelRoute.travellers.push(this.auth.getCurrentUser()._id)
-            console.log('Updated Travel Route Object:');
-            console.log(this.travelRoute);
-            var detailCtrl = this;
-            this.$http.put('/api/travelroutes/' + this.travelRoute._id, this.travelRoute).then(function (updatedRoute) {
-                console.log('UPDATING TRAVEL ROUTE SUCCEDED. DATA RESPONSE:');
-                detailCtrl.travelRoute = updatedRoute.data;
-                detailCtrl.$http.get('/api/travelroutes/travellers/' + detailCtrl.travelRoute._id).then(
-                    function (travellers) {
-                        detailCtrl.participants = travellers.data;
-                        console.log('UPDATED PARTICIPANTS AFTER JOIN');
-                        console.log(detailCtrl.participants);
-                        detailCtrl.participating = true;
-                        console.log('USER IS PARTICIPATING:');
-                        console.log(detailCtrl.participating);
-
-                    },
-                    function (response) {
-                        //failure
-                        console.log("failure");
-                        console.log(response);
+        getAlreadyRequested() {
+            var detailController = this;
+            var request = {};
+            request.receiver = this.author;
+            request.requestor = this.user;
+            request.route = this.travelRoute;
+            detailController.$http.post('/api/join-requests/search', request).then(
+                function (joinRequest) {
+                    console.log('SUCCESSFULLY LOADED EXISTING REQUEST');
+                    console.log(joinRequest);
+                    if (joinRequest.data.length != 0) {
+                        detailController.requestSent = true;
                     }
-                );
+                },
+                function (err) {
+                    console.log('NO REQUEST FOUND');
+                    console.log(err);
+                    detailController.requestSent = false;
+                }
+            );
+        }
 
-            }, function (err) {
-                console.log('UPDATING TRAVEL ROUTE FAILED');
-                console.log(err);
-            });
+        joinRoute() {
+            this.$state.go('join-request', {routeId: this.travelRoute._id});
         }
 
     }
