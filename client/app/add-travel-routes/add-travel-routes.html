@@ -42,6 +42,7 @@
                     <th>Location</th>
                     <th>Date of Arrival</th>
                     <th>Date of Departure</th>
+                    <th>Likelihood</th>
                     <th></th>
                     </thead>
                     <tbody class="tbody">
@@ -50,6 +51,7 @@
                         <td>{{stop.place}}</td>
                         <td>{{stop.startDate | date:'dd.MM.yyyy'}}</td>
                         <td>{{stop.endDate | date:'dd.MM.yyyy'}}</td>
+                        <td>{{stop.likelihood}}</td>
                         <td>Delete</td>
                     </tr>
                     </tbody>
@@ -73,6 +75,9 @@
 
                             <button type="button" class="btn btn-default" ng-click="openToDatePicker()"><i
                                     class="glyphicon glyphicon-calendar"></i></button>
+                        </td>
+                        <td>
+                            <select class="form-control" ng-model="arc.currentLikelihood" ng-options="o as o for o in arc.likelihoodOptions"></select>
                         </td>
                         <td>
                             <button type="button" class="btn btn-primary add-stop" ng-click="arc.addNewStop()">Add
