@@ -18,7 +18,7 @@ class MessagesController {
         from: this.from,
         message:this.message
     }
-conoole.log('ini');
+
 
   }
   //start-non-standard
