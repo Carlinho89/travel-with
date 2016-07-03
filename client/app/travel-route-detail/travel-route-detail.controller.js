@@ -10,12 +10,13 @@
             this.auth = Auth;
             this.$state = $state;
             //detailController.routeId = $state.params.routeId;
-            detailController.routeId = '577912e2dc8d148010cea773';
+            detailController.routeId = '577933392522902c19bbba23';
             detailController.travelRoute = {};
             detailController.author = {};
             detailController.participants = [];
             detailController.user = Auth.getCurrentUser();
             detailController.participating = false;
+            detailController.requestSent = false;
 
 
             $http.get('/api/travelroutes/' + detailController.routeId).then(
@@ -27,6 +28,7 @@
                         console.log('owner in ctrl:');
                         console.log(detailController.author);
                         detailController.getParticipants();
+                        detailController.getAlreadyRequested();
                     }, function (response) {
                         console.log('FAILED TO LOAD REQUESTER FOR ROUTE ID: ' + detailController.routeId);
                         console.log(response);
@@ -62,6 +64,26 @@
                 function (response) {
                     console.log('FAILED TO LOAD PARTICIPANTS FOR ROUTE ID: ' + detailController.routeId);
                     console.log(response);
+                }
+            );
+        }
+
+        getAlreadyRequested() {
+            var detailController = this;
+            var request = {};
+            request.receiver = this.author;
+            request.requestor = this.user;
+            request.route = this.travelRoute;
+            detailController.$http.post('/api/join-requests/search', request).then(
+                function (joinRequest) {
+                    console.log('SUCCESSFULLY LOADED EXISTING REQUEST');
+                    console.log(joinRequest);
+                    detailController.requestSent = true;
+                },
+                function (err) {
+                    console.log('NO REQUEST FOUND');
+                    console.log(err);
+                    detailController.requestSent = false;
                 }
             );
         }

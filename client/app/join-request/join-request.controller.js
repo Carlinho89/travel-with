@@ -6,8 +6,8 @@
             this.$http = $http;
             this.$state = $state;
             this.auth = Auth;
-            this.routeId = '577912e2dc8d148010cea773';
-            //this.routeId = $state.params.routeId;
+            //this.routeId = '577912e2dc8d148010cea773';
+            this.routeId = $state.params.routeId;
             this.travelRoute = {};
             this.author = {};
             this.participants = [];
@@ -22,7 +22,7 @@
                     console.log(joinCtrl.travelRoute);
                     $http.get('/api/users/' + travelRouteResponse.data.requestor).then(function (user) {
                         joinCtrl.author = user.data;
-                        console.log('REQUESTER FOR ROUTE:');
+                        console.log('AUTHOR FOR ROUTE:');
                         console.log(joinCtrl.author);
                     }, function (response) {
                         console.log('FAILED TO LOAD REQUESTER FOR ROUTE ID: ' + joinCtrl.routeId);
@@ -51,10 +51,12 @@
                 console.log('UPDATING TRAVEL ROUTE FAILED');
                 console.log(err);
             });*/
-            var request = {};
+            var request = {
+            };
             var joinCtrl = this;
-            request.requestor = this.travelRoute.requestor;
-            request.receiver = this.user;
+            request.requestor = this.user;
+            request.receiver = this.travelRoute.requestor;
+            request.route = this.travelRoute;
             this.$http.post('/api/join-requests', request).then(function(request){
                 console.log('REQUEST SUCCESSFULLY SENT');
                 console.log(request);
