@@ -10,7 +10,7 @@
             this.auth = Auth;
             this.$state = $state;
             //detailController.routeId = $state.params.routeId;
-            detailController.routeId = '577933392522902c19bbba23';
+            detailController.routeId = '57793aa168c9949c10df9a63';
             detailController.travelRoute = {};
             detailController.author = {};
             detailController.participants = [];
@@ -78,7 +78,9 @@
                 function (joinRequest) {
                     console.log('SUCCESSFULLY LOADED EXISTING REQUEST');
                     console.log(joinRequest);
+                    if(joinRequest.data.length != 0){
                     detailController.requestSent = true;
+                    }
                 },
                 function (err) {
                     console.log('NO REQUEST FOUND');
