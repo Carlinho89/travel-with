@@ -175,7 +175,7 @@ export function getUserAsTravellerTravelRoutes(req, res){
 
 }
 
-//Get Organizer of a travel route
+//Get Requestor of a travel route
 export function getTravelRoutesRequestor(req, res) {
   var tr_id = ObjectId(req.params.tr_id);
   console.log(tr_id);
@@ -193,6 +193,9 @@ export function getTravelRoutesRequestor(req, res) {
             return handleError(res);
           }
           else {
+            console.log('Requestor is: ');
+            console.log(requestor);
+
             res.json(requestor);
           }
 
