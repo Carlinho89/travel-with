@@ -92,20 +92,20 @@ export function update(req, res) {
     var travelRequestID = req.body._id;
     console.log('finding by id');
 
-    TravelRoute.findById(travelRequestID).exec(function (err, tr) {
-        if (err) {
-            return handleError(res);
-        }
-        else {
-            console.log('updating');
-            tr.remove();
-            var updatedTr = new TravelRoute(req.body);
-            console.log('updated');
-            console.log(updatedTr);
-            updatedTr.save();
-            res.send(updatedTr);
-        }
-    });
+  TravelRoute.findById(travelRequestID).exec(function (err, tr) {
+    if (err){
+      return handleError(res);
+    }
+    else {
+      console.log('updating');
+      tr.remove();
+      var updatedTr = new TravelRoute(req.body);
+      console.log('updated');
+      //console.log(updatedTr);
+      updatedTr.save();
+      res.send(updatedTr);
+    }
+  });
 }
 
 // Deletes a Thing from the DB
@@ -160,17 +160,17 @@ export function getTravelRoutesTravellers(req, res) {
 export function getUserAsTravellerTravelRoutes(req, res) {
     var user_id = ObjectId(req.params.us_id);
 
-    TravelRoute.find({
-        'travellers': user_id
-    }).exec(function (err, travelroutes) {
-        if (err) {
-            console.log('error in query');
-            return handleError(res);
-        }
-        else {
-            console.log(travelroutes);
-            res.json(travelroutes);
-        }
+  TravelRoute.find({
+    'travellers' : user_id
+  }).exec(function (err, travelroutes) {
+    if(err){
+      console.log('error in query');
+      return handleError(res);
+    }
+    else {
+      //console.log(travelroutes);
+      res.json(travelroutes);
+    }
 
     });
 
@@ -181,21 +181,21 @@ export function getTravelRoutesRequestor(req, res) {
     var tr_id = ObjectId(req.params.tr_id);
     console.log(tr_id);
 
-    TravelRoute.findOne({"_id": tr_id})
-        .exec(function (err, travelRoute) {
-            if (err) {
-                console.log('Error');
-                return handleError(err);
-            }
-            else {
-                User.findOne({'_id': travelRoute.requestor}).exec(function (err, requestor) {
-                    if (err) {
-                        console.log('error in user query');
-                        return handleError(res);
-                    }
-                    else {
-                        console.log('Requestor is: ');
-                        console.log(requestor);
+  TravelRoute.findOne({"_id": tr_id})
+    .exec(function (err, travelRoute) {
+      if (err) {
+        console.log('Error');
+        return handleError(err);
+      }
+      else {
+        User.findOne({'_id': travelRoute.requestor}).exec(function (err, requestor) {
+          if(err){
+            console.log('error in user query');
+            return handleError(res);
+          }
+          else {
+            console.log('Requestor is: ');
+            //console.log(requestor);
 
                         res.json(requestor);
                     }
