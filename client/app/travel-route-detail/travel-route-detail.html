@@ -7,14 +7,16 @@
             <div class="col-md-8">
                 <br>
 
-                <p>Travel Route:</p>
+                <p ng-show="drc.isAuthor">Travel Route (created by you):</p>
+                <p ng-hide="drc.isAuthor">Travel Route:</p>
 
                 <h1>{{drc.travelRoute.name}}</h1>
                 <br>
 
                 <p>Author:</p>
 
-                <p>{{drc.author.name}}</p>
+                <p ng-hide="drc.isAuthor">{{drc.author.name}}</p>
+                <p ng-show="drc.isAuthor">You</p>
 
                 <p>Description:</p>
 
@@ -47,7 +49,7 @@
         </div>
 
     </fieldset>
-    <div class="col-md-12 submit">
+    <div class="col-md-12 submit" ng-hide="drc.isAuthor">
         <br>
         <br>
         <div class="text-center">

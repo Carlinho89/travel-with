@@ -9,14 +9,15 @@
             this.$http = $http;
             this.auth = Auth;
             this.$state = $state;
-            //detailController.routeId = $state.params.routeId;
-            detailController.routeId = '57793aa168c9949c10df9a63';
+            detailController.routeId = $state.params.routeId;
+            //detailController.routeId = '57793aa168c9949c10df9a63';
             detailController.travelRoute = {};
             detailController.author = {};
             detailController.participants = [];
             detailController.user = Auth.getCurrentUser();
             detailController.participating = false;
             detailController.requestSent = false;
+            detailController.isAuthor = false;
 
 
             $http.get('/api/travelroutes/' + detailController.routeId).then(
@@ -25,6 +26,9 @@
                     console.log(detailController.travelRoute);
                     $http.get('/api/users/' + travelRouteResponse.data.requestor).then(function (user) {
                         detailController.author = user.data;
+                        if(detailController.author._id == detailController.user._id){
+                            detailController.isAuthor = true;
+                        }
                         console.log('owner in ctrl:');
                         console.log(detailController.author);
                         detailController.getParticipants();
@@ -78,8 +82,8 @@
                 function (joinRequest) {
                     console.log('SUCCESSFULLY LOADED EXISTING REQUEST');
                     console.log(joinRequest);
-                    if(joinRequest.data.length != 0){
-                    detailController.requestSent = true;
+                    if (joinRequest.data.length != 0) {
+                        detailController.requestSent = true;
                     }
                 },
                 function (err) {
