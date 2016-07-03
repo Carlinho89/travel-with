@@ -2,10 +2,10 @@
 (function () {
 
     class AddTravelRoutesComponent {
-        constructor($http, $scope, $state, Auth, routeDetailService) {
+        constructor($http, $scope, $state, Auth) {
             this.$http = $http;
             this.$state = $state;
-            this.route = routeDetailService;
+            this.$scope = $scope;
             $scope.fromDatePickerOpen = false;
             $scope.toDatePickerOpen = false;
             $scope.openFromDatePicker = () =>
@@ -23,42 +23,51 @@
             this.travelRequest.title = '';
             this.travelRequest.description = '';
             this.travelRequest.requestor = Auth.getCurrentUser();
+            this.currentStopName = '';
+            this.currentLocation = null;
+            this.currentStartDate = new Date();
+            this.currentEndDate = new Date();
+
 
             $scope.itineraryItems = [];
-            $scope.newItem = {
-                name: '',
-                location: {
-                    type: 'Point',
-                    coordinates: [12.123456, 13.134578]
-                },
-                startDate: null,
-                endDate: null
-            };
+            this.getItineraryItem = function(){
+                return {
+                    name: this.currentStopName,
+                    location: {
+                        type: 'Point',
+                        coordinates: [this.currentLocation.geometry.location.lat(), this.currentLocation.geometry.location.lng()]
+                    },
+                    place: this.currentLocation.name,
+                    startDate: this.currentStartDate,
+                    endDate: this.currentEndDate,
+                    likelihood: 'MUST'
+                };
+            }
 
             this.travelRequest.getDTO = function () {
                 return {
-                    title: this.title,
+                    name: this.title,
                     description: this.description,
                     itinerary: $scope.itineraryItems,
-                    requestor: this.requestor
+                    requestor: this.requestor,
+                    travellers: []
                 };
             };
-            $scope.addNewStop = function () {
-                $scope.itineraryItems.push($scope.newItem);
-                console.log($scope.newItem);
-                $scope.newItem = {
-                    name: '',
-                    location: {
-                        type: 'Point',
-                        coordinates: [12.123456, 13.134578]
-                    },
-                    startDate: null,
-                    endDate: null
-                };
-                console.log($scope.itineraryItems);
-            };
+
         }
 
+        addNewStop() {
+            console.log('CURRENT ITINERARY ITEM');
+            console.log(this.getItineraryItem());
+            console.log(this.getItineraryItem().location);
+            this.$scope.itineraryItems.push(this.getItineraryItem());
+            console.log('UPDATED ITINERARY LIST');
+            console.log(this.$scope.itineraryItems);
+            this.currentLocation = null;
+            this.currentStopName = '';
+            this.currentStartDate = null;
+            this.currentEndDate = null;
+        };
 
         createRequest() {
             var travelRouteCtrl = this;

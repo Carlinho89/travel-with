@@ -47,35 +47,36 @@
                     <tbody class="tbody">
                     <tr ng-repeat="stop in itineraryItems">
                         <td>{{stop.name}}</td>
-                        <td>{{stop.location}}</td>
-                        <td>{{stop.startDate}}</td>
-                        <td>{{stop.endDate}}</td>
+                        <td>{{stop.place}}</td>
+                        <td>{{stop.startDate | date:'dd.MM.yyyy'}}</td>
+                        <td>{{stop.endDate | date:'dd.MM.yyyy'}}</td>
                         <td>Delete</td>
                     </tr>
                     </tbody>
                     <tr>
                         <td><input id="textinput" name="textinput" type="text" placeholder="placeholder"
-                                   class="form-control input-md" ng-model="newItem.name"></td>
+                                   class="form-control input-md" ng-model="arc.currentStopName"></td>
                         <td><input id="locationinput" type="text" class="form-control"
-                                   ng-model="arc.travelRequest.destination"
+                                   ng-model="arc.currentLocation"
                                    placeholder="Enter place or city..." g-places-autocomplete></td>
                         <td>
                             <input type="text" class="form-control datepicker" uib-datepicker-popup="dd-MMMM-yyyy"
-                                   is-open="fromDatePickerOpen" ng-model="newItem.startDate"
+                                   is-open="fromDatePickerOpen" ng-model="arc.currentStartDate"
                                    datepicker-options="dateOptions" close-text="Close"/>
 
                             <button type="button" class="btn btn-default" ng-click="openFromDatePicker()"><i
                                     class="glyphicon glyphicon-calendar"></i></button>
                         </td>
                         <td><input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy"
-                                   is-open="toDatePickerOpen" ng-model="newItem.endDate"
+                                   is-open="toDatePickerOpen" ng-model="arc.currentEndDate"
                                    datepicker-options="dateOptions" close-text="Close"/>
 
                             <button type="button" class="btn btn-default" ng-click="openToDatePicker()"><i
                                     class="glyphicon glyphicon-calendar"></i></button>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-primary add-stop" ng-click="addNewStop()">Add</button>
+                            <button type="button" class="btn btn-primary add-stop" ng-click="arc.addNewStop()">Add
+                            </button>
                             <button type="button" class="btn btn-primary" ng-click="">Delete</button>
 
                         </td>
@@ -89,7 +90,7 @@
     </fieldset>
     <div class="col-md-12 submit">
         <div class="text-center">
-            <button type="submit" class="btn btn-primary create-tr" >Create Travel Route!</button>
+            <button type="submit" class="btn btn-primary create-tr">Create Travel Route!</button>
         </div>
     </div>
 
