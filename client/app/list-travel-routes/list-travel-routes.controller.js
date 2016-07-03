@@ -67,8 +67,8 @@
             console.log(response);
             thisRef.isTraveller = (response.data.length > 0) ? true : false;
             thisRef.user.travelroutesAsTraveller = response.data;
-            thisRef.getTravellers(thisRef.user.travelroutesAsOrganizer);
-            thisRef.getOrganizer(thisRef.user.travelroutesAsOrganizer);
+            thisRef.getTravellers(thisRef.user.travelroutesAsTraveller);
+            thisRef.getOrganizer(thisRef.user.travelroutesAsTraveller);
             console.log('user is traveller: ' + thisRef.isTraveller);
 
           },
@@ -108,7 +108,6 @@
             function (response) {
               //success
               console.log("get travellers success");
-              console.log(response.data);
               tr.travellers = response.data;
               thisRef.user.travellers = tr.travellers
 
@@ -128,7 +127,7 @@
           thisRef.$http.get('/api/travelroutes/organizer/' + tr._id).then(
             function (response) {
               //success
-              console.log("get travellers success");
+              console.log("get travellers success for " + tr.name);
               console.log(response.data);
               tr.requestor = response.data;
               thisRef.user.travellers = tr.travellers
