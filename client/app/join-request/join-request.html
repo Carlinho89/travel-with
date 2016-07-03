@@ -1,1 +1,61 @@
-<div>This is the join-request view.</div>
+<form class="form-horizontal" ng-submit="arc.createRequest()">
+    <fieldset>
+        <div ng-hide="jrc.participating">
+            <div class="col-md-6">
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+                <h3>You are about to join the following route:</h3>
+                <br>
+                <br>
+
+                <h1>{{jrc.travelRoute.name}}</h1>
+                <br>
+                <br>
+
+                <p>Do you want to send a join request for this route?</p>
+            </div>
+            <div class="col-md-12 submit">
+                <br>
+                <br>
+
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary create-tr" ng-hide="jrc.participating"
+                            ng-click="jrc.joinRoute()">Join this Travel
+                        Route!
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div ng-show="jrc.participating">
+            <div class="col-md-6">
+
+                <br>
+                <br>
+                <br>
+                <br>
+
+                <p>A join request has been sent to the author</p>
+            </div>
+            <div class="col-md-12 submit">
+                <br>
+                <br>
+
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary create-tr"
+                            ng-click="jrc.back()">Back
+                    </button>
+                    <button type="button" class="btn btn-primary create-tr"
+                            ui-sref="landingPage">Discover new travel routes!
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+    </fieldset>
+</form>
+
