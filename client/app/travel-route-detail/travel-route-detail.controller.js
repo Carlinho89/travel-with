@@ -8,8 +8,8 @@
             var detailController = this;
             this.$http = $http;
             this.auth = Auth;
-            //detailController.routeId = $state.params.routeId;
-            detailController.routeId = '577821da24d67ddc1ab87944';
+            detailController.routeId = $state.params.routeId;
+            //detailController.routeId = '5778d5f2c9cda4401a0661f5';
             detailController.travelRoute = {};
             detailController.author = {};
             detailController.participants = [];
@@ -25,7 +25,7 @@
                         detailController.author = user.data;
                         console.log('owner in ctrl:');
                         console.log(detailController.author);
-                        detailController.getParticipants(detailController);
+                        detailController.getParticipants();
                     }, function (response) {
                         console.log('FAILED TO LOAD REQUESTER FOR ROUTE ID: ' + detailController.routeId);
                         console.log(response);
@@ -40,10 +40,10 @@
 
         }
 
-        getParticipants(detailController) {
+        getParticipants() {
+            var detailController = this;
             detailController.$http.get('/api/travelroutes/travellers/' + detailController.routeId).then(
                 function (participantsResponse) {
-                    console.log('participants for detail page');
                     participantsResponse.data.forEach(function (item) {
                         detailController.participants.push(item);
                     });
@@ -55,6 +55,7 @@
                             detailController.participating = true;
                         }
                     });
+                    console.log('Participants list on loading');
                     console.log(detailController.participants);
                 },
                 function (response) {
@@ -70,9 +71,25 @@
             console.log(this.travelRoute);
             var detailCtrl = this;
             this.$http.put('/api/travelroutes/' + this.travelRoute._id, this.travelRoute).then(function (updatedRoute) {
-                console.log('UPDATING TRAVEL ROUTE SUCCEDED');
-                console.log(updatedRoute.data.travellers);
-                detailCtrl.participants = updatedRoute.data.travellers;
+                console.log('UPDATING TRAVEL ROUTE SUCCEDED. DATA RESPONSE:');
+                detailCtrl.travelRoute = updatedRoute.data;
+                detailCtrl.$http.get('/api/travelroutes/travellers/' + detailCtrl.travelRoute._id).then(
+                    function (travellers) {
+                        detailCtrl.participants = travellers.data;
+                        console.log('UPDATED PARTICIPANTS AFTER JOIN');
+                        console.log(detailCtrl.participants);
+                        detailCtrl.participating = true;
+                        console.log('USER IS PARTICIPATING:');
+                        console.log(detailCtrl.participating);
+
+                    },
+                    function (response) {
+                        //failure
+                        console.log("failure");
+                        console.log(response);
+                    }
+                );
+
             }, function (err) {
                 console.log('UPDATING TRAVEL ROUTE FAILED');
                 console.log(err);
