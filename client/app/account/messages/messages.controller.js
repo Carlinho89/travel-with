@@ -11,7 +11,7 @@ class MessagesController {
     this.model.from="You";// need to retrieve this from fb user login
 
     this.messageData=[];
-    this.model.message='';
+
     this.model.GetDTO = function(){
 
       return {
@@ -27,14 +27,14 @@ class MessagesController {
 
 }
   addMessage() {
-    var thisScope=this;
+    var MessagesCtrl=this;
     this.messageAdded = true;
 console.log('message sent');
     this.$http.post('/api/messages/add', this.model.GetDTO())
       .then(
         function(response){
           console.log('message added');
-          thisScope.getMessages();
+          MessagesCtrl.getMessages();
 
 
           return response.data;
@@ -49,7 +49,7 @@ console.log('message sent');
   }
   getMessages()
   {var thisScope=this;
-
+    this.messageData=[];
     this.$http.get('/api/messages/')
       .then(
         function(response){
@@ -64,7 +64,7 @@ console.log('message sent');
           return response.data;
         },
         function(response){
-          console.log('error')
+          console.log('error');
           return response.data;
           // failure callback
         }
