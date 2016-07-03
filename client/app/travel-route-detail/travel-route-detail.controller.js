@@ -10,7 +10,7 @@
             this.auth = Auth;
             this.$state = $state;
             //detailController.routeId = $state.params.routeId;
-            detailController.routeId = '577908c96562369818743377';
+            detailController.routeId = '577912e2dc8d148010cea773';
             detailController.travelRoute = {};
             detailController.author = {};
             detailController.participants = [];

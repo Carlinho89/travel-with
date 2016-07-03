@@ -3,7 +3,7 @@
 import mongoose from 'mongoose';
 
 var JoinRequestSchema = new mongoose.Schema({
-    requester: {
+    requestor: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true

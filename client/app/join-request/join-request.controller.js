@@ -6,7 +6,7 @@
             this.$http = $http;
             this.$state = $state;
             this.auth = Auth;
-            this.routeId = '577908c96562369818743377';
+            this.routeId = '577912e2dc8d148010cea773';
             //this.routeId = $state.params.routeId;
             this.travelRoute = {};
             this.author = {};
@@ -38,7 +38,7 @@
         }
 
         joinRoute() {
-            this.travelRoute.travellers.push(this.auth.getCurrentUser()._id)
+            /*this.travelRoute.travellers.push(this.auth.getCurrentUser()._id)
             console.log('Updated Travel Route Object:');
             console.log(this.travelRoute);
             var joinCtrl = this;
@@ -49,6 +49,18 @@
                 joinCtrl.participating = true;
             }, function (err) {
                 console.log('UPDATING TRAVEL ROUTE FAILED');
+                console.log(err);
+            });*/
+            var request = {};
+            var joinCtrl = this;
+            request.requestor = this.travelRoute.requestor;
+            request.receiver = this.user;
+            this.$http.post('/api/join-requests', request).then(function(request){
+                console.log('REQUEST SUCCESSFULLY SENT');
+                console.log(request);
+                joinCtrl.participating = true;
+            }, function(err){
+                console.log('REQUEST FAILED');
                 console.log(err);
             });
         }
