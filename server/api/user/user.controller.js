@@ -4,6 +4,8 @@ import User from './user.model';
 import passport from 'passport';
 import config from '../../config/environment';
 import jwt from 'jsonwebtoken';
+var ObjectId = require('mongodb').ObjectID;
+
 
 function validationError(res, statusCode) {
   statusCode = statusCode || 422;
@@ -52,9 +54,9 @@ export function create(req, res, next) {
  * Get a single user
  */
 export function show(req, res, next) {
-  var userId = req.params.id;
-
-  return User.findById(userId).exec()
+  var userId = ObjectId(req.params.id);
+  console.log(userId);
+  return User.findOne({'_id':userId}).exec()
     .then(user => {
       if (!user) {
         return res.status(404).end();

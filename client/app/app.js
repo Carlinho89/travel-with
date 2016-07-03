@@ -8,3 +8,4 @@ angular.module('travelWithApp', ['travelWithApp.auth', 'travelWithApp.admin',
 
     $locationProvider.html5Mode(true);
   });
+

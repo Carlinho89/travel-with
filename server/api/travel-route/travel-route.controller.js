@@ -99,7 +99,7 @@ export function update(req, res) {
       tr.remove();
       var updatedTr = new TravelRoute(req.body);
       console.log('updated');
-      console.log(updatedTr);
+      //console.log(updatedTr);
       updatedTr.save();
       res.send(updatedTr);
     }
@@ -166,7 +166,7 @@ export function getUserAsTravellerTravelRoutes(req, res){
       return handleError(res);
     }
     else {
-      console.log(travelroutes);
+      //console.log(travelroutes);
       res.json(travelroutes);
     }
 
@@ -193,7 +193,7 @@ export function getTravelRoutesRequestor(req, res) {
           }
           else {
             console.log('Requestor is: ');
-            console.log(requestor);
+            //console.log(requestor);
 
             res.json(requestor);
           }
