@@ -3,26 +3,24 @@
 class MessagesController {
   //end-non-standard
 
-  constructor(Auth, $state,$http, $scope) {
+  constructor(Auth, $state,$http, $scope, $timeout) {
     this.Auth = Auth;
     this.$state = $state;
     this.$http = $http;
+    this.$timeout = $timeout;
     this.model={};
     this.model.from=Auth.getCurrentUser().name;// need to retrieve this from fb user login
 
+    console.log("here");
     this.messageData=[];
     this.model.message='';
-    this.model.GetDTO = function(){
-
-      return {
-        from: this.from,
-        message:this.message
+    this.model.GetDTO = function(){ 
+        return {
+          from: this.from,
+          message:this.message
+      }
     }
-
-
-  }
-  //start-non-standard
-
+    this.pollGetMessages();
 
 
 }
@@ -48,21 +46,27 @@ console.log('message sent');
       );
 
   }
-  getMessages()
-  {var thisScope=this;
+  pollGetMessages()
+  {
+    var self = this;
+    console.log(self.pollGetMessages);
+        this.getMessages(function(){
+            self.$timeout(self.pollGetMessages.bind(self), 500);
+        });
+  }
+  getMessages(callback)
+  {
+    var self = this;
 
     this.$http.get('/api/messages/')
       .then(
         function(response){
           console.log('message added');
-          angular.forEach(response.data, function(item) {
-    thisScope.messageData.push(item);
-              });
-
-//define getMessages();
-
-
-          return response.data;
+          self.messageData = response.data;
+          if (callback)
+          {
+            callback();
+          }
         },
         function(response){
           console.log('error')
