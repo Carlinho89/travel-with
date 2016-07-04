@@ -8,7 +8,7 @@ class NavbarController {
         this.isLoggedIn = Auth.isLoggedIn;
         this.isAdmin = Auth.isAdmin;
         this.getCurrentUser = Auth.getCurrentUser;
-        this.menu = [
+        this.travelRoutesDropdown = [
             {
                 tabText: 'Travel Routes',
                 menuItems: [
@@ -22,7 +22,12 @@ class NavbarController {
                     }
                 ]
             }
+
         ];
+        this.messagesMenuItem = {
+            tabText: 'Messages',
+            state: 'messages'
+        };
     }
 
 }

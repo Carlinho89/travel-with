@@ -1,4 +1,4 @@
-<form class="form-horizontal" ng-submit="arc.createRequest()">
+<form class="form-horizontal">
     <fieldset>
 
         <div class="col-md-12">
@@ -6,13 +6,24 @@
             </div>
             <div class="col-md-8">
                 <br>
+
                 <p>Travel Route:</p>
+
                 <h1>{{drc.travelRoute.name}}</h1>
                 <br>
+
                 <p>Author:</p>
-                <p>{{drc.owner.name}}</p>
+
+                <p>{{drc.author.name}}</p>
+
                 <p>Description:</p>
-                <p>{{drc.travelRoute.name}}</p>
+
+                <p>{{drc.travelRoute.description}}</p>
+
+                <p>Participants:</p>
+
+                <p ng-repeat="participant in drc.participants">{{participant.name}}</p>
+
                 <h3>Stops on this Travel Route:</h3>
                 <table class="table table-striped">
                     <thead>
@@ -20,14 +31,13 @@
                     <th>Location</th>
                     <th>Date of Arrival</th>
                     <th>Date of Departure</th>
-                    <th></th>
                     </thead>
                     <tbody class="tbody">
                     <tr ng-repeat="stop in drc.travelRoute.itinerary">
                         <td>{{stop.name}}</td>
-                        <td>{{stop.location}}</td>
-                        <td>{{stop.startDate}}</td>
-                        <td>{{stop.endDate}}</td>
+                        <td>{{stop.place}}</td>
+                        <td>{{stop.startDate | date:'dd.MM.yyyy'}}</td>
+                        <td>{{stop.endDate | date:'dd.MM.yyyy'}}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -39,7 +49,9 @@
     </fieldset>
     <div class="col-md-12 submit">
         <div class="text-center">
-            <button type="button" class="btn btn-primary create-tr" >Join this Travel Route!</button>
+            <button type="button" class="btn btn-primary create-tr" ng-hide="drc.participating" ng-click="drc.joinRoute()">Join this Travel
+                Route!
+            </button>
         </div>
     </div>
 

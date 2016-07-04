@@ -18,6 +18,13 @@ angular.module('travelWithApp')
           $state.go(referrer);
         }
       })
+      .state('messages', {
+        url: '/chat',
+        templateUrl: 'app/account/messages/messages.html',
+        controller: 'MessagesController',
+        controllerAs: 'vm'
+
+      })
       .state('signup', {
         url: '/signup',
         templateUrl: 'app/account/signup/signup.html',
