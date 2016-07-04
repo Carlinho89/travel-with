@@ -48,11 +48,10 @@ console.log('message sent');
   }
   pollGetMessages()
   {
-    var self = this;
-    console.log(self.pollGetMessages);
-        this.getMessages(function(){
-            self.$timeout(self.pollGetMessages.bind(self), 500);
-        });
+      var self = this;
+      this.getMessages(function(){
+          self.$timeout(self.pollGetMessages.bind(self), 500);
+      });
   }
   getMessages(callback)
   {
