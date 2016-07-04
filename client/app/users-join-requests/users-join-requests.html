@@ -11,7 +11,7 @@
                 <br>
                 <br>
 
-                <h3>Join requests for travel routes you created:</h3>
+                <h3>Requests sent by you:</h3>
                 <br>
                 <table class="table table-striped">
                     <thead>
@@ -24,8 +24,26 @@
                         <td>{{req.route.name}}</td>
                         <td>{{req.receiverName}}</td>
                         <td style="float:right;">
-                            <button type="button" class="btn btn-primary" ng-click="ujrc.accept($index)">Delete
-                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br>
+                <br>
+
+                <h3>Join requests for travel routes you created:</h3>
+                <br>
+                <table class="table table-striped">
+                    <thead>
+                    <th>Join request for Route:</th>
+                    <th>Sent by:</th>
+                    <th></th>
+                    </thead>
+                    <tbody class="tbody">
+                    <tr ng-repeat="req in ujrc.requestsFor">
+                        <td>{{req.route.name}}</td>
+                        <td>{{req.requestorName}}</td>
+                        <td style="float:right;">
                         </td>
                     </tr>
                     </tbody>
