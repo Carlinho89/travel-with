@@ -9,10 +9,11 @@
       <th>Description</th>
       <th>Travellers</th>
       <th>Action</th>
+      <th></th>
       </thead>
       <tbody>
       <tr ng-repeat="tr in ltc.user.travelroutesAsOrganizer">
-        <td><a ui-sref="travel-route-detail({ routeId: tr._id })">{{tr.name}}</a></td>
+        <td>{{tr.name}}</td>
         <td>
           <a ui-sref="user-detail({ userID: ltc.user._id })">{{ltc.user.name}}</a>
         <td>{{tr.description}}</td>
@@ -24,6 +25,7 @@
         <td>
           <button class="btn btn-danger" ng-click="ltc.deleteTravelRoute($index)">Delete</button>
         </td>
+        <td><button type="button" class="btn btn-primary create-tr" ng-click="ltc.showDetailsOwn($index)" >Details</button></td>
       </tr>
       </tbody>
     </table>
@@ -37,6 +39,8 @@
       <th>Description</th>
       <th>Travellers</th>
       <th>Action</th>
+      <th></th>
+
       </thead>
       <tbody>
       <tr ng-repeat="tr in ltc.user.travelroutesAsTraveller">
@@ -53,9 +57,10 @@
         <td>
           <button class="btn btn-danger" ng-click="ltc.unsubscribeFromTravelRoute($index)">Unsubscribe</button>
         </td>
+        <td><button type="button" class="btn btn-primary create-tr" ng-click="ltc.showDetailsJoined($index)" >Details</button></td>
       </tr>
       </tbody>
-      </table>
+    </table>
   </div>
 
   <div class="col-md-12" ng-hide="(ltc.isOrganizer)||(ltc.isTraveller)">
