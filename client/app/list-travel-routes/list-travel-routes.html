@@ -12,7 +12,7 @@
       </thead>
       <tbody>
       <tr ng-repeat="tr in ltc.user.travelroutesAsOrganizer">
-        <td>{{tr.name}}</td>
+        <td><a ui-sref="travel-route-detail({ routeId: tr._id })">{{tr.name}}</a></td>
         <td>
           <a ui-sref="user-detail({ userID: ltc.user._id })">{{ltc.user.name}}</a>
         <td>{{tr.description}}</td>
