@@ -30,6 +30,7 @@ class MessagesController {
     var thisScope=this;
     this.messageAdded = true;
 console.log('message sent');
+    
     console.log(this.Auth.getCurrentUser().name);
     this.$http.post('/api/messages/add', this.model.GetDTO())
       .then(
@@ -50,7 +51,7 @@ console.log('message sent');
   }
   getMessages()
   {var thisScope=this;
-
+    this.messageData=[];
     this.$http.get('/api/messages/')
       .then(
         function(response){
