@@ -12,12 +12,13 @@
       </thead>
       <tbody>
       <tr ng-repeat="tr in ltc.user.travelroutesAsOrganizer">
-        <td>{{tr.name}}</td>
-        <td>{{ltc.user.name}}</td>
+        <td><a ui-sref="travel-route-detail({ routeId: tr._id })">{{tr.name}}</a></td>
+        <td>
+          <a ui-sref="user-detail({ userID: ltc.user._id })">{{ltc.user.name}}</a>
         <td>{{tr.description}}</td>
         <td>
           <p ng-repeat="traveller in tr.travellers">
-            {{traveller.name}}
+            <a ui-sref="user-detail({ userID: traveller._id })">{{traveller.name}}</a>
           </p>
         </td>
         <td>
@@ -40,11 +41,13 @@
       <tbody>
       <tr ng-repeat="tr in ltc.user.travelroutesAsTraveller">
         <td>{{tr.name}}</td>
-        <td>{{tr.requestor.name}}</td>
+        <td>
+          <a ui-sref="user-detail({ userID: tr.requestor._id })">{{tr.requestor.name}}</a>
+        </td>
         <td>{{tr.description}}</td>
         <td>
           <p ng-repeat="traveller in tr.travellers">
-            {{traveller.name}}
+            <a ui-sref="user-detail({ userID: traveller._id })">{{traveller.name}}</a>
           </p>
         </td>
         <td>
