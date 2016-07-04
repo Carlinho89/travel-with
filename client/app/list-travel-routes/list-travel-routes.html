@@ -25,7 +25,7 @@
         <td>
           <button class="btn btn-danger" ng-click="ltc.deleteTravelRoute($index)">Delete</button>
         </td>
-        <td><button type="button" class="btn btn-primary create-tr" ng-click="ltc.showDetailsOwn($index)" >Details</button></td>
+        <td><button type="button" class="btn btn-primary create-tr"  ui-sref="travel-route-detail({ routeId: tr._id })">Details</button></td>
       </tr>
       </tbody>
     </table>
@@ -57,7 +57,7 @@
         <td>
           <button class="btn btn-danger" ng-click="ltc.unsubscribeFromTravelRoute($index)">Unsubscribe</button>
         </td>
-        <td><button type="button" class="btn btn-primary create-tr" ng-click="ltc.showDetailsJoined($index)" >Details</button></td>
+        <td><button type="button" class="btn btn-primary create-tr"  ui-sref="travel-route-detail({ routeId: tr._id })">Details</button></td>
       </tr>
       </tbody>
     </table>
