@@ -52,10 +52,11 @@
         <br>
         <br>
         <div class="text-center">
-            <button type="button" class="btn btn-primary create-tr" ng-hide="drc.requestSent" ng-click="drc.joinRoute()">Join this Travel
+            <button type="button" class="btn btn-primary create-tr" ng-hide="drc.requestSent || drc.participating" ng-click="drc.joinRoute()">Join this Travel
                 Route!
             </button>
             <p ng-show="drc.requestSent">You already have a pending join request for this route</p>
+            <p ng-show="drc.participating">You are already part of this awesome travel route!</p>
         </div>
     </div>
 

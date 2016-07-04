@@ -19,6 +19,10 @@ class NavbarController {
                     {
                         itemText: 'Create New Route',
                         state: 'add-travel-routes',
+                    },
+                    {
+                        itemText: 'My pending Requests',
+                        state: 'users-join-requests',
                     }
                 ]
             }

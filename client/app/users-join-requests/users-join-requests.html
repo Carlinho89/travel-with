@@ -1,0 +1,58 @@
+<form class="form-horizontal" ng-submit="arc.createRequest()">
+    <fieldset>
+        <div class="col-md-12">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-8">
+                <br>
+                <br>
+
+                <h1>Your pending join requests</h1>
+                <br>
+                <br>
+
+                <h3>Requests sent by you:</h3>
+                <br>
+                <table class="table table-striped">
+                    <thead>
+                    <th>Join request for Route:</th>
+                    <th>Sent to:</th>
+                    <th></th>
+                    </thead>
+                    <tbody class="tbody">
+                    <tr ng-repeat="req in ujrc.requestsBy">
+                        <td>{{req.route.name}}</td>
+                        <td>{{req.receiverName}}</td>
+                        <td style="float:right;">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br>
+                <br>
+
+                <h3>Join requests for travel routes you created:</h3>
+                <br>
+                <table class="table table-striped">
+                    <thead>
+                    <th>Join request for Route:</th>
+                    <th>Sent by:</th>
+                    <th></th>
+                    </thead>
+                    <tbody class="tbody">
+                    <tr ng-repeat="req in ujrc.requestsFor">
+                        <td>{{req.route.name}}</td>
+                        <td>{{req.requestorName}}</td>
+                        <td style="float:right;">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-2">
+            </div>
+        </div>
+
+    </fieldset>
+
+</form>

@@ -70,6 +70,14 @@
 
         }
 
+        deleteStop(index) {
+            console.log('items before deletion:');
+            console.log(this.$scope.itineraryItems);
+            this.$scope.itineraryItems.splice(index, 1);
+            console.log('items after deletion:');
+            console.log(this.$scope.itineraryItems);
+        };
+
         addNewStop() {
             console.log('CURRENT ITINERARY ITEM');
             console.log(this.getItineraryItem());
