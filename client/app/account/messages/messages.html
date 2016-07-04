@@ -1,14 +1,18 @@
+
+
 <div class="container">
+    <form class="form">
+
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-md-12">
       <h1>Messages</h1>
     </div>
-    <div class="col-sm-12">
+    <div class="col-md-12">
 
       <label>Enter your message, and then press submit</label><br>
 
       <input type="text" name="Send2" class="form-control" ng-model="vm.model.message"
-      /> <br>
+                 required/><br>
       <div class="text-center">
         <button ng-click="vm.addMessage()" class="btn btn-primary">Send</button>
         <button ng-click="vm.getMessages()" class="btn btn-primary">Refresh</button>
@@ -51,6 +55,4 @@
 
 
   </form>
-</div>
-</div>
 </div>
