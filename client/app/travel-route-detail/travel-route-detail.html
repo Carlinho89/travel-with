@@ -14,8 +14,7 @@
                 <br>
 
                 <p>Author:</p>
-
-                <p ng-hide="drc.isAuthor">{{drc.author.name}}</p>
+                <p ng-hide="drc.isAuthor"><a ui-sref="user-detail({ userID: drc.author._id})">{{drc.author.name}}</a></p>
                 <p ng-show="drc.isAuthor">You</p>
 
                 <p>Description:</p>
