@@ -26,7 +26,7 @@
                     console.log(detailController.travelRoute);
                     $http.get('/api/users/' + travelRouteResponse.data.requestor).then(function (user) {
                         detailController.author = user.data;
-                        if(detailController.author._id == detailController.user._id){
+                        if (detailController.author._id == detailController.user._id) {
                             detailController.isAuthor = true;
                         }
                         console.log('owner in ctrl:');
@@ -78,7 +78,7 @@
             request.receiver = this.author;
             request.requestor = this.user;
             request.route = this.travelRoute;
-            detailController.$http.post('/api/join-requests/search', request).then(
+            detailController.$http.post('/api/join-requests/searchByRoute', request).then(
                 function (joinRequest) {
                     console.log('SUCCESSFULLY LOADED EXISTING REQUEST');
                     console.log(joinRequest);

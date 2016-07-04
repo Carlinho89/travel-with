@@ -101,9 +101,22 @@ export function destroy(req, res) {
         .catch(handleError(res));
 }
 
-export function getRequest(req, res) {
-    console.log("ich bin hier");
+export function getRequestsForRoute(req, res) {
     return JoinRequest.find({$and:[{route: req.body.route}, {requestor: req.body.requestor}]}).exec()
+        .then(handleEntityNotFound(res))
+        .then(respondWithResult(res))
+        .catch(handleError(res));
+}
+
+export function getRequestsByUser(req, res) {
+    return JoinRequest.find({requestor: req.body.requestor}).exec()
+        .then(handleEntityNotFound(res))
+        .then(respondWithResult(res))
+        .catch(handleError(res));
+}
+
+export function getRequestsForUser(req, res) {
+    return JoinRequest.find({receiver: req.body.receiver}).exec()
         .then(handleEntityNotFound(res))
         .then(respondWithResult(res))
         .catch(handleError(res));
