@@ -1,71 +1,83 @@
-<div class="col-md-12" >
-  <h1>{{ltc.user.name}}'s Travels</h1>
-  <div class="col-md-12" ng-show="ltc.isOrganizer">
-    <h3>Here you can see all of Travels you are organizing:</h3>
-    <table class="table table-striped">
-      <thead>
-      <th>Name</th>
-      <th>Organizer</th>
-      <th>Description</th>
-      <th>Travellers</th>
-      <th>Action</th>
-      <th></th>
-      </thead>
-      <tbody>
-      <tr ng-repeat="tr in ltc.user.travelroutesAsOrganizer">
-        <td>{{tr.name}}</td>
-        <td>
-          <a ui-sref="user-detail({ userID: ltc.user._id })">{{ltc.user.name}}</a>
-        <td>{{tr.description}}</td>
-        <td>
-          <p ng-repeat="traveller in tr.travellers">
-            <a ui-sref="user-detail({ userID: traveller._id })">{{traveller.name}}</a>
-          </p>
-        </td>
-        <td>
-          <button class="btn btn-danger" ng-click="ltc.deleteTravelRoute($index)">Delete</button>
-        </td>
-        <td><button type="button" class="btn btn-primary create-tr" ng-click="ltc.showDetailsOwn($index)" >Details</button></td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="col-md-12" ng-show="ltc.isTraveller">
-    <h3>Here you can see all of Travels you joined as traveller:</h3>
-    <table class="table table-striped">
-      <thead>
-      <th>Name</th>
-      <th>Organizer</th>
-      <th>Description</th>
-      <th>Travellers</th>
-      <th>Action</th>
-      <th></th>
+<div class="col-md-12">
+    <h1>{{ltc.user.name}}'s Travels</h1>
 
-      </thead>
-      <tbody>
-      <tr ng-repeat="tr in ltc.user.travelroutesAsTraveller">
-        <td>{{tr.name}}</td>
-        <td>
-          <a ui-sref="user-detail({ userID: tr.requestor._id })">{{tr.requestor.name}}</a>
-        </td>
-        <td>{{tr.description}}</td>
-        <td>
-          <p ng-repeat="traveller in tr.travellers">
-            <a ui-sref="user-detail({ userID: traveller._id })">{{traveller.name}}</a>
-          </p>
-        </td>
-        <td>
-          <button class="btn btn-danger" ng-click="ltc.unsubscribeFromTravelRoute($index)">Unsubscribe</button>
-        </td>
-        <td><button type="button" class="btn btn-primary create-tr" ng-click="ltc.showDetailsJoined($index)" >Details</button></td>
-      </tr>
-      </tbody>
-      </table>
-  </div>
+    <div class="col-md-12" ng-show="ltc.isOrganizer">
+        <h3>Here you can see all of Travels you are organizing:</h3>
+        <table class="table table-striped">
+            <thead>
+            <th>Name</th>
+            <th>Organizer</th>
+            <th>Description</th>
+            <th>Travellers</th>
+            <th>Action</th>
+            <th></th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="tr in ltc.user.travelroutesAsOrganizer">
+                <td><a ui-sref="travel-route-detail({ routeId: tr._id })">{{tr.name}}</a></td>
+                <td>
+                    <a ui-sref="user-detail({ userID: ltc.user._id })">{{ltc.user.name}}</a>
+                <td>{{tr.description}}</td>
+                <td>
+                    <p ng-repeat="traveller in tr.travellers">
+                        <a ui-sref="user-detail({ userID: traveller._id })">{{traveller.name}}</a>
+                    </p>
+                </td>
+                <td>
+                    <button class="btn btn-danger" ng-click="ltc.deleteTravelRoute($index)">Delete</button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary create-tr" ng-click="ltc.showDetailsOwn($index)">
+                        Details
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-12" ng-show="ltc.isTraveller">
+        <h3>Here you can see all of Travels you joined as traveller:</h3>
+        <table class="table table-striped">
+            <thead>
+            <th>Name</th>
+            <th>Organizer</th>
+            <th>Description</th>
+            <th>Travellers</th>
+            <th>Action</th>
+            <th></th>
 
-  <div class="col-md-12" ng-hide="(ltc.isOrganizer)||(ltc.isTraveller)">
-    <h1>Sorry but you have no travels scheduled!!</h1>
-    <h4>Why not <a ui-sref="landingPage">searching</a> for or <a ui-sref="add-travel-routes">organizing one</a> yourself!</h4>
-  </div>
+            </thead>
+            <tbody>
+            <tr ng-repeat="tr in ltc.user.travelroutesAsTraveller">
+                <td>{{tr.name}}</td>
+                <td>
+                    <a ui-sref="user-detail({ userID: tr.requestor._id })">{{tr.requestor.name}}</a>
+                </td>
+                <td>{{tr.description}}</td>
+                <td>
+                    <p ng-repeat="traveller in tr.travellers">
+                        <a ui-sref="user-detail({ userID: traveller._id })">{{traveller.name}}</a>
+                    </p>
+
+                </td>
+                <td>
+                    <button class="btn btn-danger" ng-click="ltc.unsubscribeFromTravelRoute($index)">Unsubscribe
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary create-tr" ng-click="ltc.showDetailsJoined($index)">
+                        Details
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-12" ng-hide="(ltc.isOrganizer)||(ltc.isTraveller)">
+        <h1>Sorry but you have no travels scheduled!!</h1>
+        <h4>Why not <a ui-sref="landingPage">searching</a> for or <a ui-sref="add-travel-routes">organizing one</a>
+            yourself!</h4>
+    </div>
 
 </div>

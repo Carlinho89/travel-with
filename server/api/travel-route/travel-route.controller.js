@@ -88,9 +88,9 @@ export function create(req, res) {
 
 // Updates an existing Thing in the DB
 export function update(req, res) {
-    console.log('update!:');
-    var travelRequestID = req.body._id;
-    console.log('finding by id');
+  console.log('update!:');
+  var travelRequestID = req.body._id;
+  console.log('finding by id');
 
   TravelRoute.findById(travelRequestID).exec(function (err, tr) {
     if (err){
@@ -157,8 +157,8 @@ export function getTravelRoutesTravellers(req, res) {
 }
 
 //Get all travel routes in which the user is registred as traveller
-export function getUserAsTravellerTravelRoutes(req, res) {
-    var user_id = ObjectId(req.params.us_id);
+export function getUserAsTravellerTravelRoutes(req, res){
+  var user_id = ObjectId(req.params.us_id);
 
   TravelRoute.find({
     'travellers' : user_id
@@ -172,14 +172,14 @@ export function getUserAsTravellerTravelRoutes(req, res) {
       res.json(travelroutes);
     }
 
-    });
+  });
 
 }
 
 //Get Requestor of a travel route
 export function getTravelRoutesRequestor(req, res) {
-    var tr_id = ObjectId(req.params.tr_id);
-    console.log(tr_id);
+  var tr_id = ObjectId(req.params.tr_id);
+  console.log(tr_id);
 
   TravelRoute.findOne({"_id": tr_id})
     .exec(function (err, travelRoute) {
@@ -197,14 +197,14 @@ export function getTravelRoutesRequestor(req, res) {
             console.log('Requestor is: ');
             //console.log(requestor);
 
-                        res.json(requestor);
-                    }
+            res.json(requestor);
+          }
 
-                });
-
-
-            }
         });
+
+
+      }
+    });
 
 }
 

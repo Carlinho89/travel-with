@@ -1,15 +1,15 @@
 'use strict';
 (function () {
-
+//test
     class TravelRouteDetailComponent {
 
-        constructor($http, $state, Auth) {
+        constructor($http, $state, $stateParams, Auth) {
 
             var detailController = this;
             this.$http = $http;
             this.auth = Auth;
             this.$state = $state;
-            detailController.routeId = $state.params.routeId;
+            detailController.routeId = $stateParams.routeId;
             //detailController.routeId = '57793aa168c9949c10df9a63';
             detailController.travelRoute = {};
             detailController.author = {};
