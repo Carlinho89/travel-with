@@ -8,7 +8,7 @@ class MessagesController {
     this.$state = $state;
     this.$http = $http;
     this.model={};
-    this.model.from="You";// need to retrieve this from fb user login
+    this.model.from=Auth.getCurrentUser().name;// need to retrieve this from fb user login
 
     this.messageData=[];
     this.model.message='';
@@ -30,6 +30,7 @@ class MessagesController {
     var thisScope=this;
     this.messageAdded = true;
 console.log('message sent');
+    console.log(this.Auth.getCurrentUser().name);
     this.$http.post('/api/messages/add', this.model.GetDTO())
       .then(
         function(response){
